@@ -3,15 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./styles/index.css";
 import App from "./App";
 import AppContext from "./contextApi/Context";
-import Wrapper from "./components/UI/entireApp/Wrapper";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AppContext>
-      <Wrapper>
-        <App />
-      </Wrapper>
+      <App />
     </AppContext>
   </React.StrictMode>
 );

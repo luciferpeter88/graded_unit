@@ -5,7 +5,7 @@ import Home from "./components/Pages/Home/Home";
 import About from "./components/Pages/About_Us/About";
 import Badges from "./components/Pages/Badges/Badges";
 import Contact from "./components/Pages/Contact_Us/Contact_Us";
-import Dashboard from "./components/Pages/Dashboard/Dashboard";
+// import Dashboard from "./components/Pages/Dashboard/Dashboard";
 import Gallery from "./components/Pages/Gallery/Gallery";
 import Games from "./components/Pages/Games/Games";
 import Register from "./components/Pages/Register/Register";

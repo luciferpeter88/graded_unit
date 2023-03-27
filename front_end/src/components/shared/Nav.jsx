@@ -10,7 +10,7 @@ function Nav() {
 
   return (
     <React.Fragment>
-      <nav className=" flex items-center justify-between">
+      <nav className=" flex items-center justify-between p-3">
         <h1 className=" text-xl  font-semibold md:text-2xl">Oban Scouts</h1>
         {data.state.toggle ? (
           <AiOutlineClose
@@ -24,7 +24,7 @@ function Nav() {
           />
         )}
 
-        <div className=" hidden lg:block">
+        <div className=" hidden lg:block space-x-10">
           <DesignedNav to="/" whereTo="Home" />
           <DesignedNav to="/about" whereTo="About" />
           <DesignedNav to="/badges" whereTo="Badges" />

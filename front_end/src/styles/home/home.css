@@ -1,0 +1,39 @@
+.containerHome {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 65% 40%;
+  row-gap: 1rem;
+  grid-template-areas:
+    "area1 area2"
+    "area3 area3";
+  /* height: calc(100vh - 4rem); */
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.area1 {
+  grid-area: area1;
+}
+
+.area2 {
+  grid-area: area2;
+}
+
+.area3 {
+  grid-area: area3;
+}
+
+@media (max-width: 1022px) {
+  .containerHome {
+    display: grid;
+    row-gap: 2rem;
+    grid-template-columns: 100%;
+    grid-template-rows: 40% 25% 35%;
+    grid-template-areas:
+      "area2"
+      "area1"
+      "area3";
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}

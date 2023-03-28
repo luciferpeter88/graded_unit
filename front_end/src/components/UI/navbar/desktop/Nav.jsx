@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 // Define CSS classes for the active and inactive states of the NavLink
 const active = "text-white bg-green-900 py-1 px-4 rounded font-medium";
-const in_active = "text-green-900 font-medium";
+const in_active = "text-green-900 font-medium  py-1 px-4";
 
 // Define the Nav component
 function Nav({ to, whereTo }) {

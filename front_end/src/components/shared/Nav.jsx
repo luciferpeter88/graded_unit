@@ -10,7 +10,7 @@ function Nav() {
 
   return (
     <React.Fragment>
-      <nav className=" flex items-center justify-between p-3">
+      <nav className=" flex items-center justify-between p-5 h-16">
         <h1 className=" text-xl  font-semibold md:text-2xl">Oban Scouts</h1>
         {data.state.toggle ? (
           <AiOutlineClose
@@ -24,14 +24,18 @@ function Nav() {
           />
         )}
 
-        <div className=" hidden lg:block space-x-10">
-          <DesignedNav to="/" whereTo="Home" />
-          <DesignedNav to="/about" whereTo="About" />
-          <DesignedNav to="/badges" whereTo="Badges" />
-          <DesignedNav to="/gallery" whereTo="Gallery" />
-          <DesignedNav to="/games" whereTo="Games" />
-          <DesignedNav to="/login" whereTo="Login" />
-          <DesignedNav to="/register" whereTo="Register" />
+        <div className=" hidden lg:flex space-x-10">
+          <div>
+            <DesignedNav to="/" whereTo="Home" />
+            <DesignedNav to="/about" whereTo="About" />
+            <DesignedNav to="/badges" whereTo="Badges" />
+            <DesignedNav to="/gallery" whereTo="Gallery" />
+            <DesignedNav to="/games" whereTo="Games" />
+          </div>
+          <div>
+            <DesignedNav to="/login" whereTo="Login" />
+            <DesignedNav to="/register" whereTo="Register" />
+          </div>
         </div>
       </nav>
       <SlideMenu />

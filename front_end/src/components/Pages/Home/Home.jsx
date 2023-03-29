@@ -72,7 +72,7 @@ function Home() {
         </p>
       </div>
       {/* The data is going to be coming from the database */}
-      <div className=" py-5 mt-5 px-5 flex xl:justify-between justify-center  gap-5 flex-wrap ">
+      <div className=" py-5 mt-5 px-5 flex xl:justify-between 2xl:justify-center justify-center  gap-5 flex-wrap ">
         <Card />
         <Card />
         <Card />

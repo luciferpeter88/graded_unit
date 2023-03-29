@@ -57,7 +57,7 @@ function Footer() {
           </div>
         </div>
         <div class="container mx-auto px-6">
-          <div class="mt-8 border-t-2 border-gray-300 flex flex-col items-center">
+          <div class="mt-8 border-t-[1px] border-white flex flex-col items-center">
             <div class="sm:w-2/3 text-center py-6">
               <p class="text-lg text-white font-bold mb-2">
                 © 2023 by Peter Kaszap Nagy

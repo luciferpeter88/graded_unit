@@ -12,6 +12,7 @@ import Card from "../../UI/Home/Card";
 import Arrow from "../../UI/Home/Arrow";
 import homeCamp from "../../../assets/images/Home/homeCamp.png";
 import DetailsCard from "../../UI/Home/DetailsCard";
+import Footer from "../../UI/footer/Footer";
 
 function Home() {
   return (
@@ -128,6 +129,7 @@ function Home() {
           color="bg-green-900"
         />
       </div>
+      <Footer />
     </React.Fragment>
   );
 }

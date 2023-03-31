@@ -8,7 +8,7 @@ import pic2 from "../../../assets/images/about/about2.png";
 function About() {
   return (
     <React.Fragment>
-      <div className=" px-5 containerAbout">
+      <div className=" px-5 containerAbout 2xl:container 2xl:mx-auto">
         <h1 className="areaHeader text-center text-green-900  body-font font-bold text-2xl lg:text-4xl ">
           About Us
         </h1>
@@ -32,7 +32,7 @@ function About() {
             posuere in. Pellentesque volutpat vestibulum.
           </p>
         </div>
-        <div className="aboutImg">
+        <div className="aboutImg ">
           <img
             src={pic}
             alt=""

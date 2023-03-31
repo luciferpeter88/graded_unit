@@ -1,5 +1,4 @@
 import React from "react";
-import "../../../styles/badges/badges.css";
 import air from "../../../assets/images/badges/air.png";
 
 function Icon({ badgeIcon }) {

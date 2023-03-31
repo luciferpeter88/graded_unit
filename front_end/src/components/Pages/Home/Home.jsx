@@ -1,6 +1,6 @@
 import React from "react";
 import "../../../styles/home/home.css";
-import homePic from "../../../assets/images/Home/scout.avif";
+import homePic from "../../../assets/images/Home/scout.jpeg";
 import { GoLocation } from "react-icons/go";
 import { ImMobile } from "react-icons/im";
 import { HiOutlineMailOpen } from "react-icons/hi";

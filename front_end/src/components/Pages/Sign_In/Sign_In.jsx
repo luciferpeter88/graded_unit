@@ -1,6 +1,7 @@
 import React from "react";
 import signIn from "../../../assets/images/login&registration/test.jpg";
 import { Link } from "react-router-dom";
+import Input from "../../UI/login&registration/Input";
 
 function SignIn() {
   return (
@@ -10,28 +11,18 @@ function SignIn() {
           <h1 className="text-green-900  body-font font-bold text-2xl lg:text-4xl text-center">
             Login
           </h1>
-          <div className="flex flex-col gap-y-2 mx-auto w-[100%] px-5 md:px-0 md:w-[65%]">
-            <label htmlFor="email" className=" text-green-900 text-lg">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="example2@gmail.com"
-              className=" h-12  bg-[#F4F2F2] p-3 rounded-md outline-green-600"
-            />
-          </div>
-          <div className="flex flex-col gap-y-2 mx-auto w-[100%] px-5 md:px-0 md:w-[65%]">
-            <label htmlFor="password" className=" text-green-900 text-lg">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="**********"
-              className=" h-12  bg-[#F4F2F2] p-3 rounded-md outline-green-600"
-            />
-          </div>
+          <Input
+            id="email"
+            label="Email"
+            type="email"
+            pHolder="example2@gmail.com"
+          />
+          <Input
+            id="password"
+            label="Password"
+            type="password"
+            pHolder="**********"
+          />
           <div className="flex flex-col gap-y-2 mx-auto w-[100%] px-5 md:px-0 md:w-[65%]">
             <button className=" text-white bg-green-900 py-1 px-4 h-10 w-full rounded font-medium">
               Login

@@ -1,11 +1,11 @@
 import React from "react";
-import signIn from "../../../assets/images/login&registration/contact.jpg";
+import signIn from "../../../assets/images/login&registration/test.jpg";
 import { Link } from "react-router-dom";
 
 function SignIn() {
   return (
     <React.Fragment>
-      <section className=" flex lg:h-[calc(100vh-5.5rem)] mt-6 flex-col-reverse gap-y-16 pb-10 lg:gap-y-0 lg:flex-row">
+      <section className=" flex lg:h-[calc(100vh-5.5rem)] md:mt-6 flex-col-reverse gap-y-16 pb-10 lg:gap-y-0 lg:flex-row">
         <div className=" lg:w-1/2 flex flex-col justify-center gap-y-7">
           <h1 className="text-green-900  body-font font-bold text-2xl lg:text-4xl text-center">
             Login
@@ -45,8 +45,8 @@ function SignIn() {
           </p>
         </div>
         <div
-          className=" h-[50vh] lg:h-[calc(100vh-5.5rem)] lg:w-1/2 bg-cover bg-center"
-          style={{ backgroundImage: `url(${signIn})` }}
+          className=" h-[50vh] lg:h-[calc(100vh-5.5rem)] lg:w-1/2 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${signIn})`, backgroundSize: "95%" }}
         ></div>
       </section>
     </React.Fragment>

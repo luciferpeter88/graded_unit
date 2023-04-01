@@ -31,6 +31,7 @@ function Nav() {
             <DesignedNav to="/badges" whereTo="Badges" />
             <DesignedNav to="/gallery" whereTo="Gallery" />
             <DesignedNav to="/games" whereTo="Games" />
+            <DesignedNav to="/contact" whereTo="Contact Us" />
           </div>
           <div>
             <DesignedNav to="/login" whereTo="Login" />

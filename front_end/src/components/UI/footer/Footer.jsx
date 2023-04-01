@@ -38,6 +38,7 @@ function Footer() {
                   <Link to="/badges">Badges</Link>
                   <Link to="/gallery">Gallery</Link>
                   <Link to="/games">Games</Link>
+                  <Link to="/contact">Contact Us</Link>
                   <Link to="/login">Login</Link>
                   <Link to="/register">Register</Link>
                 </span>

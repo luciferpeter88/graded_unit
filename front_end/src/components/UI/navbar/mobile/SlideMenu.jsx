@@ -18,6 +18,7 @@ function SlideMenu() {
             <DesignedNav to="/badges" whereTo="Badges" />
             <DesignedNav to="/gallery" whereTo="Gallery" />
             <DesignedNav to="/games" whereTo="Games" />
+            <DesignedNav to="/contact" whereTo="Contact Us" />
             <DesignedNav to="/login" whereTo="Sign In" />
             <DesignedNav to="/register" whereTo="Register" />
           </ul>

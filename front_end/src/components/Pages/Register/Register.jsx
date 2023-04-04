@@ -12,14 +12,27 @@ function Register() {
             Create Account
           </h1>
           <div className=" flex w-[100%]  md:w-[65%] mx-auto gap-x-3 flex-col md:flex-row gap-y-3">
-            <Input id="fName" label="First Name" type="text" pHolder="John" />
-            <Input id="lName" label="Last Name" type="text" pHolder="Smith" />
+            <Input
+              id="fName"
+              label="First Name"
+              type="text"
+              pHolder="John"
+              padding="px-5"
+            />
+            <Input
+              id="lName"
+              label="Last Name"
+              type="text"
+              pHolder="Smith"
+              padding="px-5"
+            />
           </div>
           <Input
             id="email"
             label="Email"
             type="email"
             pHolder="example2@gmail.com"
+            padding="px-5"
           />
           <div className=" flex w-[100%] md:w-[65%] mx-auto gap-x-3 flex-col md:flex-row gap-y-3">
             <Input
@@ -27,12 +40,14 @@ function Register() {
               label="Password"
               type="password"
               pHolder="**********"
+              padding="px-5"
             />
             <Input
               id="cPassword"
               label="Confirm Password"
               type="password"
               pHolder="**********"
+              padding="px-5"
             />
           </div>
           <div className="flex flex-col gap-y-2 mx-auto w-[100%] px-5 md:px-0 md:w-[65%]">

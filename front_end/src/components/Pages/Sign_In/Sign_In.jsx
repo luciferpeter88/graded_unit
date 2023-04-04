@@ -16,12 +16,14 @@ function SignIn() {
             label="Email"
             type="email"
             pHolder="example2@gmail.com"
+            padding="px-5"
           />
           <Input
             id="password"
             label="Password"
             type="password"
             pHolder="**********"
+            padding="px-5"
           />
           <div className="flex flex-col gap-y-2 mx-auto w-[100%] px-5 md:px-0 md:w-[65%]">
             <button className=" text-white bg-green-900 py-1 px-4 h-10 w-full rounded font-medium">

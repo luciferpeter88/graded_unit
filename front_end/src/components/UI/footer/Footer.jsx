@@ -13,7 +13,7 @@ function Social({ icon }) {
 function Footer() {
   return (
     <React.Fragment>
-      <footer className="footer bg-green-900 relative pt-1  mt-16">
+      <footer className="footer bg-[#2a4b37] relative pt-1  mt-16">
         <div className=" mx-auto px-5 lg:px-0 lg:container">
           <div className="sm:flex sm:mt-8">
             <div className="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">

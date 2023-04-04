@@ -1,8 +1,10 @@
 import React from "react";
 
-function Input({ id, label, type, pHolder }) {
+function Input({ id, label, type, pHolder, padding }) {
   return (
-    <div className="flex flex-col gap-y-2 mx-auto w-[100%] px-5 md:px-0 md:w-[65%]">
+    <div
+      className={`flex flex-col gap-y-2 mx-auto w-[100%] ${padding} md:px-0 md:w-[65%]`}
+    >
       <label htmlFor={id} className=" text-green-900 text-lg">
         {label}
       </label>

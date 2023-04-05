@@ -8,7 +8,7 @@ function SlideMenu() {
     <React.Fragment>
       <div className="min-h-screen  absolute top-0 lg:hidden">
         <div
-          className={`wrapper fixed top-0 transition-all duration-500 ease-in-out h-screen w-screen bg-white ${
+          className={`wrapper fixed top-0 transition-all duration-500 ease-in-out h-screen w-screen bg-green-900 z-20 ${
             data.state.toggle ? "right-0" : "right-full"
           }`}
         >

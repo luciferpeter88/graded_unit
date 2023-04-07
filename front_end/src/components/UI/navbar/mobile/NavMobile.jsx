@@ -18,7 +18,7 @@ function NavMobile({ to, whereTo }) {
       end
       // Set the destination route using the 'to' prop
       to={to}
-      onClick={() => data.dispatch({ type: "TOGGLE" })}
+      onClick={() => data.navDispatch({ type: "TOGGLE" })}
     >
       {/* Display the text for the NavLink using the 'whereTo' prop */}
       {whereTo}

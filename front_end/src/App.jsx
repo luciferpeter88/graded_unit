@@ -10,6 +10,7 @@ import Gallery from "./components/Pages/Gallery/Gallery";
 import Games from "./components/Pages/Games/Games";
 import Register from "./components/Pages/Register/Register";
 import SignIn from "./components/Pages/Sign_In/Sign_In";
+import SingleGame from "./components/UI/games/SingleGame";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="gallery" element={<Gallery />} />
             <Route path="games" element={<Games />} />
-            {/* <Route path="games/:gamesName" element={<Games />} /> */}
+            <Route path="games/:gamesName" element={<SingleGame />} />
             <Route path="register" element={<Register />} />
             {/* <Route
               path="dashboard"

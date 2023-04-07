@@ -3,7 +3,7 @@ import pic from "../../../assets/images/Home/homeCardPic.png";
 
 function Card() {
   return (
-    <div className="max-w-sm  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-center items-center py-3 drop-shadow-lg">
+    <div className="max-w-sm  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-center items-center py-3 drop-shadow-lg transition-all ease-linear duration-150 hover:translate-y-[-0.75rem] hover:border-2 hover:border-green-400">
       <div>
         <img className="rounded-t-lg" src={pic} alt="" />
       </div>
@@ -17,7 +17,7 @@ function Card() {
         <p className="mb-3 font-normal mt-3 text-gray-700 dark:text-gray-400">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget nunc,
         </p>
-        <div className="inline-flex items-center px-3 py-2 text-sm font text-center text-white   bg-green-900 h-10 w-32 rounded font-medium  pointer">
+        <div className="inline-flex items-center px-3 py-2 text-sm font text-center text-white   bg-green-900 h-10 w-32 rounded font-medium cursor-pointer    transition-all duration-150">
           Read more
           <svg
             aria-hidden="true"

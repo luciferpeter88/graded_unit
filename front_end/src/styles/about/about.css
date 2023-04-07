@@ -34,9 +34,9 @@
   .containerAbout {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 7vh 50vh auto auto;
+    grid-template-rows: 7vh 35vh auto auto;
     gap: 1rem;
-    row-gap: 4.5rem;
+    row-gap: 2.5rem;
     grid-template-areas:
       "area1"
       "area2"
@@ -44,7 +44,6 @@
       "area4"
       "area5"
       "area6";
-    margin-top: 2rem;
     margin-bottom: 7.5%;
   }
 }

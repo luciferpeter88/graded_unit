@@ -12,15 +12,15 @@ function Nav() {
     <React.Fragment>
       <nav className=" flex items-center justify-between p-5 h-16">
         <h1 className=" text-xl  font-semibold md:text-2xl">Oban Scouts</h1>
-        {data.state.toggle ? (
+        {data.navState.toggle ? (
           <AiOutlineClose
             className=" text-3xl md:text-4xl lg:hidden cursor-pointer z-30 text-white fixed right-3"
-            onClick={() => data.dispatch({ type: "TOGGLE" })}
+            onClick={() => data.navDispatch({ type: "TOGGLE" })}
           />
         ) : (
           <BiMenuAltRight
             className=" text-3xl md:text-4xl lg:hidden cursor-pointer z-30 text-green-900 fixed right-3"
-            onClick={() => data.dispatch({ type: "TOGGLE" })}
+            onClick={() => data.navDispatch({ type: "TOGGLE" })}
           />
         )}
 

@@ -11,6 +11,7 @@ import Games from "./components/Pages/Games/Games";
 import Register from "./components/Pages/Register/Register";
 import SignIn from "./components/Pages/Sign_In/Sign_In";
 import SingleGame from "./components/UI/games/SingleGame";
+import SingleBadge from "./components/UI/badges/SingleBadge";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="login" element={<SignIn />} />
             <Route path="about" element={<About />} />
             <Route path="badges" element={<Badges />} />
+            <Route path="badges/:badgeName" element={<SingleBadge />} />
             <Route path="contact" element={<Contact />} />
             <Route path="gallery" element={<Gallery />} />
             <Route path="games" element={<Games />} />

@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import CardB from "../../UI/badges/CardB";
 import Footer from "../../UI/footer/Footer";
+import Search from "../../UI/shared/Search";
+import badgesContext from "../../../context_Reducer/badges/badgeContext";
+import Arrow from "../../UI/shared/Arrow";
+
 function Badges() {
+  const { badgesState } = useContext(badgesContext);
+  const { badgesDispatch } = useContext(badgesContext);
+
   return (
     <React.Fragment>
       <h1 className="text-green-900  body-font font-bold text-2xl lg:text-4xl text-center mt-8">
         Badges
       </h1>
-      <div className=" grid px-2 md:grid-cols-2 md:gap-x-5 lg:grid-cols-3 2xl:grid-cols-4">
-        {/* This is going to be dynamic */}
-        <CardB />
-        <CardB />
-        <CardB />
-        <CardB />
+      <div className=" flex justify-center mt-5 ">
+        <Search placeholder="badges" />
       </div>
+      <div className=" grid px-3 md:grid-cols-2 md:gap-x-5 lg:grid-cols-3 2xl:grid-cols-4 mt-5">
+        {badgesState.badgeList
+          .slice(
+            badgesState.getIndexOfFirstItem(),
+            badgesState.getIndexOfLastItem()
+          )
+          .map((badge) => {
+            return <CardB badge={badge} key={badge.id} />;
+          })}
+      </div>
+      <Arrow
+        onclickNext={() => badgesDispatch({ type: "BADGE_NEXT" })}
+        onclickPrev={() => badgesDispatch({ type: "BADGE_PREV" })}
+        pageNumbers={`${badgesState.currentPage}/11`}
+      />
       <Footer />
     </React.Fragment>
   );

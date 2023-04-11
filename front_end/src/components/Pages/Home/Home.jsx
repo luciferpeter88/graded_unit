@@ -9,7 +9,7 @@ import { CiLocationOn } from "react-icons/ci";
 import Contact from "../../UI/Home/Contact";
 import Divider from "../../UI/Home/Divider";
 import Card from "../../UI/Home/Card";
-import Arrow from "../../UI/Home/Arrow";
+import Arrow from "../../UI/shared/Arrow";
 import homeCamp from "../../../assets/images/Home/homeCamp.png";
 import DetailsCard from "../../UI/Home/DetailsCard";
 import Footer from "../../UI/footer/Footer";
@@ -125,7 +125,7 @@ function Home() {
         />
         <DetailsCard
           icon={<CiLocationOn />}
-          description="23 Main St.Oban"
+          description="123 Main St.Oban"
           color="bg-green-900"
         />
       </div>

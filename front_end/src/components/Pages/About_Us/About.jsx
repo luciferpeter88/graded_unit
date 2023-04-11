@@ -1,8 +1,8 @@
 import React from "react";
 import "../../../styles/about/about.css";
-import logo from "../../../assets/images/logo/logo.jpeg";
+import logo from "../../../assets/images/logo/logo.png";
 import Footer from "../../UI/footer/Footer";
-import pic from "../../../assets/images/about/about.png";
+import pic from "../../../assets/images/about/about.jpg";
 import pic2 from "../../../assets/images/about/about2.png";
 
 function About() {

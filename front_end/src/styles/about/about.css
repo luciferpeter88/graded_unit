@@ -34,7 +34,7 @@
   .containerAbout {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 7vh 35vh auto auto;
+    grid-template-rows: 7vh 35vh auto auto auto;
     gap: 1rem;
     row-gap: 2.5rem;
     grid-template-areas:

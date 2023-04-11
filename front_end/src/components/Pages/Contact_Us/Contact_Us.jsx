@@ -70,10 +70,13 @@ function Contact_Us() {
             Send Message
           </button>
         </div>
-        <div
-          className=" col-span-2  bg-cover bg-center h-96"
-          style={{ backgroundImage: `url(${map})` }}
-        ></div>
+        <div className=" col-span-2 h-96">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2239.9765555995136!2d-4.231797283785894!3d55.84572147610628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x488846b41b7bb221%3A0xf813b9e0febec015!2sThe%20Old%20Rugged%20Cross%20Spiritual%20Mission%2C%20123%20Main%20St%2C%20Bridgeton%2C%20Glasgow%20G40%201QD!5e0!3m2!1sen!2suk!4v1680942610035!5m2!1sen!2suk"
+            title="Online Game"
+            className="w-full h-full"
+          ></iframe>
+        </div>
       </div>
 
       <Footer />

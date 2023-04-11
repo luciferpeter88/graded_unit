@@ -17,6 +17,7 @@ function SingleGame() {
 
   return (
     <div>
+      {/* <h1>Hello</h1> */}
       <iframe
         src={gameState.gameUrl}
         title="Online Game"

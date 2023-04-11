@@ -1,9 +1,9 @@
 import React from "react";
 import test from "../../../assets/images/about/about2.png";
 import Footer from "../../UI/footer/Footer";
-import Search from "../../UI/gallery/Search";
+import Search from "../../UI/shared/Search";
 import Dark from "../../UI/gallery/Dark";
-import Arrow from "../../UI/Home/Arrow";
+import Arrow from "../../UI/shared/Arrow";
 function Gallery() {
   return (
     <React.Fragment>
@@ -12,7 +12,7 @@ function Gallery() {
           <h1 className="text-green-900  body-font font-bold text-2xl lg:text-4xl text-center">
             Gallery
           </h1>
-          <Search />
+          <Search placeholder="a picture" />
         </div>
         <div className=" grid grid-cols-1 md:grid-cols-6 gap-2 mt-16 min-h-[180vh] md:min-h-screen">
           <div

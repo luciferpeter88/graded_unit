@@ -1,30 +1,22 @@
 import React from "react";
-import air from "../../../assets/images/badges/air.png";
+import { Link } from "react-router-dom";
+import Icon from "./Icon";
 
-function Icon({ badgeIcon }) {
-  return (
-    <div className="  w-[7rem] h-[7rem]  bg-white rounded-md flex justify-center items-center">
-      <img src={badgeIcon} alt="" />
-    </div>
-  );
-}
-
-function CardB() {
+function CardB({ badge }) {
+  const { title, picture } = badge;
   return (
     <React.Fragment>
-      <div className=" h-[15rem] bg-[#dce1df] rounded-md mt-10 flex gap-x-5 justify-evenly pl-2 items-center">
-        <Icon badgeIcon={air} />
-        <div className="   flex flex-col gap-y-5 w-[15rem]">
-          <h2 className=" text-green-900  body-font font-semibold text-lg lg:text-2xl">
-            Air Activities
+      <div className=" h-[15rem] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700  drop-shadow-lg  mt-10 flex  justify-around items-center transition-all ease-linear duration-150 hover:translate-y-[-0.75rem] hover:border-2 hover:border-green-400">
+        <Icon badgeIcon={picture} />
+        <div className="   flex flex-col justify-around h-full w-1/2">
+          <h2 className=" text-green-900  body-font font-medium text-lg lg:text-xl">
+            {title}
           </h2>
-          <p>
-            here are three parts to this badge: Know the dangers involved in
-            visiting an airfield.
-          </p>
-          <button className="  text-white bg-green-900 py-1 px-4 h-10 w-32 rounded font-medium ">
-            Read More
-          </button>
+          <Link to={`/badges/${title}`}>
+            <button className="  text-white bg-green-900 py-1 px-4 h-10 w-32 rounded font-medium ">
+              Read More
+            </button>
+          </Link>
         </div>
       </div>
     </React.Fragment>

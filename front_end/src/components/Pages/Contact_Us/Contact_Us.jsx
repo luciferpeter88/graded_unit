@@ -1,14 +1,25 @@
 import React from "react";
 import contactPic from "../../../assets/images/contact/contactUs.png";
-import map from "../../../assets/images/contact/map.png";
 import Footer from "../../../components/UI/footer/Footer";
 import Card from "../../UI/contactUs/Card";
 import Input from "../../UI/login&registration/Input";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsTelephoneInbound } from "react-icons/bs";
 import { CiLocationOn } from "react-icons/ci";
+import { useForm } from "react-hook-form";
 
 function Contact_Us() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    // console.log(data);
+    //send data to backend
+  };
+
   return (
     <React.Fragment>
       <h1 className="text-green-900  body-font font-bold text-2xl lg:text-4xl text-center mt-8">
@@ -44,8 +55,27 @@ function Contact_Us() {
             Send Your Message
           </h1>
           <div className=" flex w-[100%] gap-x-3 flex-col md:flex-row gap-y-3 mt-3">
-            <Input id="nameC" label="Name" type="text" pHolder="Name" />
-            <Input id="emailC" label="Email" type="email" pHolder="Email" />
+            <Input
+              id="nameC"
+              label="Name"
+              type="text"
+              pHolder="Name"
+              register={register}
+              validation={{ required: "Name is required" }}
+              error={errors.nameC}
+            />
+            <Input
+              id="emailC"
+              label="Email"
+              type="email"
+              pHolder="Email"
+              register={register}
+              validation={{
+                required: "Email is required",
+                pattern: { value: /^\S+@\S+$/i, message: "Invalid email" },
+              }}
+              error={errors.emailC}
+            />
           </div>
           <div className=" flex w-[100%] gap-x-3 flex-col md:flex-row gap-y-3 mt-3">
             <Input
@@ -53,8 +83,25 @@ function Contact_Us() {
               label="Mobile No"
               type="number"
               pHolder="Mobile No"
+              register={register}
+              validation={{
+                required: "Mobile number is required",
+                pattern: {
+                  value: /^((\+44\s?|0)7\d{9})$/,
+                  message: "Invalid UK mobile number format",
+                },
+              }}
+              error={errors.mobileC}
             />
-            <Input id="subject" label="Subject" type="text" pHolder="Subject" />
+            <Input
+              id="subject"
+              label="Subject"
+              type="text"
+              pHolder="Subject"
+              register={register}
+              validation={{ required: "Subject is required" }}
+              error={errors.subject}
+            />
           </div>
           <div className=" flex flex-col gap-y-3 mt-3 h-[15rem]">
             <label htmlFor="textArea" className=" text-green-900 text-lg">
@@ -63,10 +110,19 @@ function Contact_Us() {
             <textarea
               id="textArea"
               placeholder="Send message"
-              className="bg-[#F4F2F2] p-3 rounded-md outline-green-600 w-[100%] h-full"
+              className={`bg-[#F4F2F2] p-3 rounded-md outline-green-600 w-[100%] h-full ${
+                errors.textArea ? "outline-red-500" : ""
+              }`}
+              {...register("textArea", { required: "Message is required" })}
             />
+            {errors.textArea && (
+              <p className="text-red-500 text-sm">*{errors.textArea.message}</p>
+            )}
           </div>
-          <button className=" bg-green-900 text-white px-5 py-2 rounded-md mt-5">
+          <button
+            className=" bg-green-900 text-white px-5 py-2 rounded-md mt-5"
+            onClick={handleSubmit(onSubmit)}
+          >
             Send Message
           </button>
         </div>

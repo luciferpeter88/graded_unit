@@ -25,7 +25,7 @@ function Badges() {
       <div className=" flex justify-center mt-5 relative">
         <Search placeholder="badges" change={handleChange} />
         {badgesState.loading ? (
-          <div className="absolute bg-[#F4F2F2] text-gray-400 border border-gray-300 rounded w-1/3 top-14 left-1/2 transform -translate-x-1/2 z-20 max-h-[50vh] overflow-auto">
+          <div className="absolute bg-[#F4F2F2] text-gray-400 border border-gray-300 rounded w-2/3 xl:w-1/3 top-14 left-1/2 transform -translate-x-1/2 z-20 max-h-[50vh] overflow-auto">
             <ul>
               {badgesState.filteredBadgeList.map((item, index) => (
                 <li

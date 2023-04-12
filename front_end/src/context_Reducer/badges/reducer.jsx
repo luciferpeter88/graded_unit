@@ -1,9 +1,17 @@
 function reducer(state, action) {
+  const numberOfPages = Math.ceil(
+    state.filteredBadgeList.length / state.itemsPerPage
+  );
   if (action.type === "BADGE_NEXT") {
-    if (state.getIndexOfFirstItem() === 150) {
+    const badgesNum = Math.floor(
+      state.filteredBadgeList.length / state.itemsPerPage
+    );
+
+    if (state.getIndexOfFirstItem() === badgesNum * state.itemsPerPage) {
       return {
         ...state,
         currentPage: 1,
+        numberOfPages: numberOfPages,
       };
     }
     return {
@@ -15,13 +23,15 @@ function reducer(state, action) {
     if (state.currentPage === 1) {
       return {
         ...state,
-        currentPage: 11,
+        currentPage: numberOfPages,
+        numberOfPages: numberOfPages,
       };
     }
     if (state.currentPage > 1) {
       return {
         ...state,
         currentPage: state.currentPage - 1,
+        numberOfPages: numberOfPages,
       };
     }
   }
@@ -35,6 +45,34 @@ function reducer(state, action) {
       name: singleBadge.title,
       aim: singleBadge.shortDescription,
       description: singleBadge.longDescription,
+    };
+  }
+  if (action.type === "BADGE_SEARCH") {
+    const searchValue = action.payload.toLowerCase();
+
+    if (searchValue === "") {
+      return {
+        ...state,
+        filteredBadgeList: state.badgeList,
+        numberOfPages: 11,
+      };
+    }
+    const filteredBadges = state.badgeList.filter((badge) => {
+      return badge.title.toLowerCase().includes(searchValue);
+    });
+    if (numberOfPages === 0) {
+      return {
+        ...state,
+        filteredBadgeList: filteredBadges,
+        numberOfPages: 1,
+        currentPage: 1,
+      };
+    }
+    return {
+      ...state,
+      filteredBadgeList: filteredBadges,
+      numberOfPages: numberOfPages,
+      currentPage: 1,
     };
   }
   return state;

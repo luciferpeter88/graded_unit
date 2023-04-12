@@ -7,6 +7,7 @@ const initialState = {
   description: "",
   badgeList: badges,
   filteredBadgeList: badges,
+  loading: false,
   currentPage: 1,
   itemsPerPage: 15,
   numberOfPages: 11,

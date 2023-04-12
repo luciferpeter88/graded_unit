@@ -53,6 +53,7 @@ function reducer(state, action) {
     if (searchValue === "") {
       return {
         ...state,
+        loading: false,
         filteredBadgeList: state.badgeList,
         numberOfPages: 11,
       };
@@ -70,8 +71,21 @@ function reducer(state, action) {
     }
     return {
       ...state,
+      loading: true,
       filteredBadgeList: filteredBadges,
       numberOfPages: numberOfPages,
+      currentPage: 1,
+    };
+  }
+  if (action.type === "BADGE_TEXT") {
+    const singleBadge = state.badgeList.find(
+      (singleBadge) => singleBadge.title === action.payload
+    );
+    return {
+      ...state,
+      filteredBadgeList: [singleBadge],
+      loading: false,
+      numberOfPages: 1,
       currentPage: 1,
     };
   }

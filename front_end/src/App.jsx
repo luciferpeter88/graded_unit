@@ -5,7 +5,7 @@ import Home from "./components/Pages/Home/Home";
 import About from "./components/Pages/About_Us/About";
 import Badges from "./components/Pages/Badges/Badges";
 import Contact from "./components/Pages/Contact_Us/Contact_Us";
-// import Dashboard from "./components/Pages/Dashboard/Dashboard";
+import AdminDash from "./components/Pages/Dashboard/AdminDash";
 import Gallery from "./components/Pages/Gallery/Gallery";
 import Games from "./components/Pages/Games/Games";
 import Register from "./components/Pages/Register/Register";
@@ -28,7 +28,9 @@ function App() {
             <Route path="gallery" element={<Gallery />} />
             <Route path="games" element={<Games />} />
             <Route path="games/:gamesName" element={<SingleGame />} />
-            <Route path="register" element={<Register />} />
+            {/* <Route path="register" element={<Register />} /> */}
+            {/* while I am working on the dashboard */}
+            <Route path="register" element={<AdminDash />} />
             {/* <Route
               path="dashboard"
               element={

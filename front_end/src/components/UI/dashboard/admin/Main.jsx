@@ -1,6 +1,5 @@
 import React from "react";
 import "../../../../styles/dashboard/dashboard.css";
-import { IonIcon } from "@ionic/react";
 import {
   menuOutline,
   searchOutline,
@@ -9,26 +8,12 @@ import {
   hourglassOutline,
 } from "ionicons/icons";
 import Card from "./Card";
+import TopBar from "./TopBar";
 
 const Main = () => {
   return (
     <div className="main">
-      <div className="topbar">
-        <div className="toggle">
-          <IonIcon icon={menuOutline} />
-        </div>
-
-        <div className="search">
-          <label>
-            <input type="text" placeholder="Search here" />
-            <IonIcon icon={searchOutline} />
-          </label>
-        </div>
-
-        <div className="user">
-          <img src="" alt="" />
-        </div>
-      </div>
+      <TopBar menu={menuOutline} search={searchOutline} />
 
       <div className="cardBox">
         <Card icon={peopleOutline} text="Registered Helpers" number="1,504" />

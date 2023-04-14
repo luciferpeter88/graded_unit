@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { Outlet } from "react-router-dom";
-import DesignedNav from "../UI/navbar/desktop/Nav";
-import SlideMenu from "../UI/navbar/mobile/SlideMenu";
+import DesignedNav from "../UI/navbar/end-users/desktop/Nav";
+import SlideMenu from "../UI/navbar/end-users/mobile/SlideMenu";
 import navContext from "../../context_Reducer/nav/navContext";
 function Nav() {
   const data = useContext(navContext);

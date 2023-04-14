@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import DesignedNav from "./NavMobile";
-import navContext from "../../../../context_Reducer/nav/navContext";
+import navContext from "../../../../../context_Reducer/nav/navContext";
 function SlideMenu() {
   const data = useContext(navContext);
 

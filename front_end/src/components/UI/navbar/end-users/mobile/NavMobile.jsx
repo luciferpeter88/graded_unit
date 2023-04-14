@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import navContext from "../../../../context_Reducer/nav/navContext";
+import navContext from "../../../../../context_Reducer/nav/navContext";
 
 // Define CSS classes for the active and inactive states of the NavLink
 const active =

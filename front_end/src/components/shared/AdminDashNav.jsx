@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../styles/dashboard/dashboard.css";
 import {
   homeOutline,
@@ -10,11 +10,13 @@ import {
 } from "ionicons/icons";
 import { Outlet } from "react-router-dom";
 import Nav from "../UI/navbar/admin/Nav";
+import navContext from "../../context_Reducer/nav/navContext";
 
 const Navigation = () => {
+  const { navState } = useContext(navContext);
   return (
     <React.Fragment>
-      <div className="navigation">
+      <div className={`navigation ${navState.toggleDash ? "active" : null}`}>
         <ul>
           <Nav icon={personOutline} title="Admin" />
           <Nav icon={homeOutline} title="Dashboard" whereTo="/dashboard" />

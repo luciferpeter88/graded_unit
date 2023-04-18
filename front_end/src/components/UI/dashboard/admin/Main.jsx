@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../../../styles/dashboard/dashboard.css";
 import {
   menuOutline,
@@ -9,10 +9,13 @@ import {
 } from "ionicons/icons";
 import Card from "./Card";
 import TopBar from "./TopBar";
+import navContext from "../../../../context_Reducer/nav/navContext";
+import test from "../../../../assets/images/test/test.jpg";
 
 const Main = () => {
+  const { navState } = useContext(navContext);
   return (
-    <div className="main">
+    <div className={`main ${navState.toggleDash ? "active" : null}`}>
       <TopBar menu={menuOutline} search={searchOutline} />
 
       <div className="cardBox">
@@ -27,7 +30,7 @@ const Main = () => {
       </div>
 
       <div className="details">
-        <div className="recentOrders">
+        <div className="recentOrders shadow dark:bg-gray-800 dark:border-gray-700 drop-shadow-lg">
           <div className="cardHeader">
             <h2>Helpers Availability</h2>
             <a href="#" className="btn">
@@ -35,28 +38,48 @@ const Main = () => {
             </a>
           </div>
 
-          <table>
-            {/* <thead>
-              <tr>
-                <td>Name</td>
-                <td>Price</td>
-                <td>Payment</td>
-                <td>Status</td>
+          <table className="flex flex-col">
+            <thead>
+              <tr className="flex justify-between py-5">
+                <th>Name</th>
+                <th>Availability</th>
               </tr>
-            </thead> */}
-
-            <tbody>{/* Add table rows here */}</tbody>
+            </thead>
+            <tbody>
+              <tr className="flex justify-between items-center rounded">
+                <td className="flex gap-x-3 items-center">
+                  <img src={test} alt="" className="h-14 w-14" />
+                  Peter Kaszap Nagy
+                </td>
+                <td>05/07/2023</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr className="flex justify-between items-center rounded">
+                <td className="flex gap-x-3 items-center">
+                  <img src={test} alt="" className="h-14 w-14" />
+                  Peter Kaszap Nagy
+                </td>
+                <td>05/07/2023</td>
+              </tr>
+            </tbody>
           </table>
         </div>
 
-        <div className="recentCustomers">
+        <div className="recentCustomers shadow dark:bg-gray-800 dark:border-gray-700 drop-shadow-lg">
           <div className="cardHeader">
             <h2>Registered Helpers</h2>
           </div>
-
-          <table>
-            <tbody>{/* Add table rows here */}</tbody>
-          </table>
+          <div className=" mt-5 text-white flex flex-col gap-y-2">
+            <div className=" flex gap-x-3 items-center bg-green-900 w-full p-3 rounded">
+              <img src={test} alt="" className="h-14 w-14" />
+              <h2>Peter Kaszap Nagy</h2>
+            </div>
+            <div className=" flex gap-x-3 items-center bg-green-900 w-full p-3 rounded">
+              <img src={test} alt="" className="h-14 w-14" />
+              <h2>Peter Kaszap Nagy</h2>
+            </div>
+          </div>
         </div>
       </div>
     </div>

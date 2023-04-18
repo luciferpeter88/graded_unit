@@ -4,7 +4,7 @@ import "../../../../styles/dashboard/dashboard.css";
 
 function Card({ icon, number, text }) {
   return (
-    <div className="card">
+    <div className="card shadow dark:bg-gray-800 dark:border-gray-700 drop-shadow-lg">
       <div>
         <div className="numbers">{number}</div>
         <div className="cardName">{text}</div>

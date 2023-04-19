@@ -23,6 +23,7 @@ function App() {
     <React.Fragment>
       <BrowserRouter>
         <Routes>
+          {/* end users */}
           <Route path="/" element={<Nav />}>
             <Route index element={<Home />} />
             <Route path="login" element={<SignIn />} />
@@ -35,6 +36,7 @@ function App() {
             <Route path="games/:gamesName" element={<SingleGame />} />
             <Route path="register" element={<Register />} />
           </Route>
+          {/* end of end users */}
           {/* admin dashboard */}
           <Route
             path="/"
@@ -77,7 +79,7 @@ function App() {
               }
             />
           </Route>
-          {/* admin dashboard  */}
+          {/* end of admin dashboard  */}
         </Routes>
       </BrowserRouter>
     </React.Fragment>

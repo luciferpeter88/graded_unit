@@ -34,19 +34,6 @@ const Main = () => {
               Events
             </a>
           </div>
-
-          <table>
-            {/* <thead>
-              <tr>
-                <td>Name</td>
-                <td>Price</td>
-                <td>Payment</td>
-                <td>Status</td>
-              </tr>
-            </thead> */}
-
-            <tbody>{/* Add table rows here */}</tbody>
-          </table>
         </div>
 
         <div className="recentCustomers">

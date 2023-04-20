@@ -14,12 +14,32 @@ import test from "../../../../assets/images/test/test.jpg";
 
 const Main = () => {
   const { navState } = useContext(navContext);
+  //dummy data for testing
+  const headers = ["Name", "Status", "Edit"];
+  const headers2 = ["Name", "Status", "Edit"];
+
+  const data = [
+    { name: "Alice", status: "Approved" },
+    { name: "Bob", status: "Declined" },
+    { name: "Charlie", status: "Pending" },
+    { name: "David", status: "Approved" },
+    { name: "Eva", status: "Declined" },
+  ];
+  const options = ["Approved", "Declined", "Pending"];
+
   return (
     <div className={`main ${navState.toggleDash ? "active" : null}`}>
       <TopBar menu={menuOutline} search={searchOutline} />
 
       <div className="cardBox">
-        <Card icon={peopleOutline} text="Registered Helpers" number="1,504" />
+        <Card
+          icon={peopleOutline}
+          text="Registered Helpers"
+          number="1,504"
+          headers={headers}
+          data={data}
+          options={options}
+        />
         <Card icon={cloudUploadOutline} text="Uploaded Picture" number="80" />
         <Card
           icon={hourglassOutline}

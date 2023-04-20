@@ -154,7 +154,7 @@ function Helpers() {
       <TopBar menu={menuOutline} search={searchOutline} />
 
       <div className="flex flex-wrap justify-center items-center p-5 gap-x-5">
-        <div className="w-full xl:w-[30%] mb-4 xl:mb-0 shadow bg-white dark:bg-gray-800 dark:border-gray-700 drop-shadow-xl h-96 overflow-y-scroll ">
+        <div className="w-full xl:w-[30%] mb-4 xl:mb-0 shadow bg-white dark:bg-gray-800 dark:border-gray-700 drop-shadow-xl h-96 overflow-y-scroll">
           <ListBoxComponent
             dataSource={people}
             onChange={onSelect}
@@ -162,7 +162,7 @@ function Helpers() {
           />
         </div>
         <div className="w-full xl:w-2/3">
-          <div className="bg-white  rounded-lg flex flex-col gap-y-3 shadow dark:bg-gray-800 dark:border-gray-700 drop-shadow-lg p-5">
+          <div className="bg-white  rounded-lg flex flex-col gap-y-3 shadow dark:bg-gray-800 dark:border-gray-700 drop-shadow-lg p-5 items-start">
             <div className="text-green-900 font-semibold text-center text-xl">
               Profile Details
             </div>
@@ -173,9 +173,17 @@ function Helpers() {
                 alt=""
               />
             </div>
-
+            <div>
+              <h3 className="text-green-900 text-sm font-semibold">About Me</h3>
+              <p className=" text-gray-500 mt-3 w-[90%]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Nascetur imperdiet at a augue ullamcorper. Leo faucibus feugiat
+                rutrum aenean. Nisi, lectus aliquet aliquam consectetur augue
+                praesent. Lorem vulputate orci eget mi, sed pulvinar.
+              </p>
+            </div>
             <form>
-              <div className="flex flex-wrap mt-3 gap-y-3">
+              <div className="flex flex-wrap mt-5 gap-y-3">
                 <Input
                   label="First name"
                   id="inputFirstName"

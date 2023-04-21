@@ -224,8 +224,8 @@ function Helpers() {
                   label="Status"
                   id="status"
                   type="text"
-                  placeholder="Approved"
-                  defaultValue="Approved"
+                  inputType="select"
+                  defaultValue="Pending"
                 />
               </div>
               <div className=" px-2 mt-5 flex gap-x-3">

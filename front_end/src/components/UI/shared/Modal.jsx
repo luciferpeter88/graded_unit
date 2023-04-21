@@ -8,7 +8,7 @@ function Modal({ showModal, setShowModal, text, headers, data, options }) {
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-[90vw] xl:w-[50vw] 2xl:w-[45vw] bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-xl font-semibold text-green-900">
@@ -24,7 +24,7 @@ function Modal({ showModal, setShowModal, text, headers, data, options }) {
                   </button>
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto xl:h-[50vh] h-[50vh] overflow-y-scroll w-[100vw] xl:w-[50vw]">
+                <div className="relative p-6 flex-auto xl:h-[50vh] h-[50vh] overflow-y-scroll">
                   <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                       <tr>

@@ -17,6 +17,7 @@ import Helpers from "./components/Pages/Dashboard/admin/Helpers";
 import AdminDGallery from "./components/Pages/Dashboard/admin/AdminDGallery";
 import AdminEvents from "./components/Pages/Dashboard/admin/AdminEvents";
 import ProtectedAdmin from "./components/Pages/Dashboard/admin/ProtectedAdmin";
+import Profile from "./components/Pages/Dashboard/helpers/Profile";
 
 function App() {
   return (
@@ -78,6 +79,16 @@ function App() {
             />
           </Route>
           {/* admin dashboard  */}
+          {/* helpers profile page */}
+          <Route
+            path="profile"
+            element={
+              <ProtectedAdmin>
+                <Profile />
+              </ProtectedAdmin>
+            }
+          />
+          {/* helpers profile page */}
         </Routes>
       </BrowserRouter>
     </React.Fragment>

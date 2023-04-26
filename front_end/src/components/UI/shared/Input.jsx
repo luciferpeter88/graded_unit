@@ -1,6 +1,14 @@
 import React from "react";
 
-function Input({ label, id, type, placeholder, defaultValue, inputType }) {
+function Input({
+  label,
+  id,
+  type,
+  placeholder,
+  defaultValue,
+  inputType,
+  readonly,
+}) {
   const options = [
     { value: "Approved" },
     { value: "Declined" },
@@ -33,6 +41,7 @@ function Input({ label, id, type, placeholder, defaultValue, inputType }) {
           type={type}
           placeholder={placeholder}
           defaultValue={defaultValue}
+          readOnly={readonly}
         />
       )}
     </div>

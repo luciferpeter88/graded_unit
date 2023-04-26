@@ -3,7 +3,7 @@ import "../../../../styles/dashboard/dashboard.css";
 import TopBar from "../../../UI/dashboard/admin/TopBar";
 import { menuOutline, searchOutline } from "ionicons/icons";
 import navContext from "../../../../context_Reducer/nav/navContext";
-import Input from "../../../UI/dashboard/admin/Input";
+import Input from "../../../UI/shared/Input";
 import { ListBoxComponent } from "@syncfusion/ej2-react-dropdowns";
 import "@syncfusion/ej2-react-dropdowns/styles/material.css";
 function Helpers() {

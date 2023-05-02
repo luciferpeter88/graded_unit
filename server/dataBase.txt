@@ -1,0 +1,36 @@
+users collection:
+_id (ObjectId, unique, auto-generated)
+first_name (String)
+last_name (String)
+email (String, unique)
+password (String, hashed)
+role (String: 'admin' or 'helper')
+status (String: 'active', 'declined', or 'pending')
+username (String, unique)
+phone_number (String)
+profile_picture (String: path to the image file)
+availability (Array of Objects)
+title (String)
+location (String)
+start_time (Date)
+end_time (Date)
+description (String)
+
+
+pictures collection:
+_id (ObjectId, unique, auto-generated)
+user_id (ObjectId, reference to users._id)
+image_path (String)
+status (String: 'active', 'declined', or 'pending')
+
+
+events collection:
+_id (ObjectId, unique, auto-generated)
+title (String)
+location (String)
+start_time (Date)
+end_time (Date)
+description (String)
+When designing a schema for MongoDB, it's essential to consider how the data will be accessed and updated in your application. Since MongoDB is a NoSQL database, you can embed related data within a single document. However, you may still want to use references between collections in some cases to maintain consistency and avoid duplication.
+
+In this schema, we use references between the users and pictures collections via the user_id field in the pictures collection. This allows you to easily fetch pictures uploaded by a specific user while maintaining a normalized data structure.

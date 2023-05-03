@@ -3,23 +3,18 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const session = require("express-session");
-//creating a class for global middlewares
+
 class GlobalMiddlewares {
-  constructor() {
-    this.app = express();
-    this.setupMiddleware();
+  constructor(app) {
+    this.app = app;
   }
-  //creating a function for global middlewares
-  setupMiddleware() {
-    //applying these middlewares for the entire application
-    this.app.use([
-      bodyParser.urlencoded({ extended: false }),
-      bodyParser.json(),
-    ]);
+
+  setup() {
+    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.json());
     this.app.use(cookieParser());
     this.app.use(
       cors({
-        origin: true,
         origin: "http://localhost:3000",
         methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
         credentials: true,
@@ -41,4 +36,4 @@ class GlobalMiddlewares {
   }
 }
 
-module.exports = new GlobalMiddlewares();
+module.exports = GlobalMiddlewares;

@@ -1,19 +1,26 @@
-const express = require("express");
-const app = express();
-require("./middlewares/global");
+// Import the express package
+const express = require("express")();
+// Import the global middlewares
+const GlobalMiddlewares = require("./middlewares/global");
+// Import the dotenv package
 require("dotenv").config();
 // Import the database connection
 require("./config/database");
+// Import the routes
 const registration = require("./controllers/register");
 const login = require("./controllers/login");
-// applying these middlewares for the entire application
+// inmitiate the global middlewares
+const globals = new GlobalMiddlewares(express);
+//invoke the setup method to apply the middlewares
+globals.setup();
+
+// create a route for the login page
+express.use("/login", login.getRouter());
 
 // create a route for the registration page
-app.use("/registration", registration);
-// create a route for the login page
-app.use("/login", login);
+express.use("/registration", registration.getRouter());
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
+express.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

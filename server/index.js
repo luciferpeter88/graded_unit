@@ -10,9 +10,7 @@ require("./config/database");
 const registration = require("./controllers/register");
 const login = require("./controllers/login");
 // inmitiate the global middlewares
-const globals = new GlobalMiddlewares(express);
-//invoke the setup method to apply the middlewares
-globals.setup();
+new GlobalMiddlewares(express);
 
 // create a route for the login page
 express.use("/login", login.getRouter());

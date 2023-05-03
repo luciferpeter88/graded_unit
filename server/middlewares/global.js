@@ -5,8 +5,11 @@ const cors = require("cors");
 const session = require("express-session");
 
 class GlobalMiddlewares {
-  constructor(app) {
-    this.app = app;
+  // create a constructor to initialize the express arguement
+  constructor(expressArguement) {
+    this.app = expressArguement;
+    // initialize the middlewares immediately the class is instantiated
+    this.setup();
   }
 
   setup() {

@@ -8,7 +8,7 @@ class GlobalMiddlewares {
   // create a constructor to initialize the express arguement
   constructor(expressArguement) {
     this.app = expressArguement;
-    // initialize the middlewares immediately the class is instantiated
+    // run the setup method immediately the class is instantiated
     this.setup();
   }
 

@@ -19,6 +19,11 @@ import profileInitial from "../context_Reducer/profile/initial";
 import profileReducer from "../context_Reducer/profile/reducer";
 import profileContext from "../context_Reducer/profile/profileContext";
 // end of data for profile
+// data for auth
+import authInitial from "../context_Reducer/auth/initial";
+import authReducer from "../context_Reducer/auth/reducer";
+import authContext from "../context_Reducer/auth/authContext";
+// end of data for auth
 function AppContext({ children }) {
   const [navState, navDispatch] = useReducer(navReducer, navInitial);
   const [gameState, gameDispatch] = useReducer(gamesReducer, gamesInitial);
@@ -30,13 +35,16 @@ function AppContext({ children }) {
     profileReducer,
     profileInitial
   );
+  const [authState, authDispatch] = useReducer(authReducer, authInitial);
 
   return (
     <navContext.Provider value={{ navState, navDispatch }}>
       <gamesContext.Provider value={{ gameState, gameDispatch }}>
         <badgesContext.Provider value={{ badgesState, badgesDispatch }}>
           <profileContext.Provider value={{ profileState, profileDispatch }}>
-            {children}
+            <authContext.Provider value={{ authState, authDispatch }}>
+              {children}
+            </authContext.Provider>
           </profileContext.Provider>
         </badgesContext.Provider>
       </gamesContext.Provider>

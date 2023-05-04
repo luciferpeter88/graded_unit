@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
+import useAuth from "../../../../context_Reducer/auth/authContext";
 
 function ProtectedAdmin({ children }) {
+  const data = useContext(useAuth);
+  console.log(data);
   const loggedIn = true;
 
   if (loggedIn) {

@@ -19,8 +19,11 @@ function SignIn() {
       const response = await axios.post("http://localhost:4000/login", data, {
         withCredentials: true,
       });
-      console.log(response);
-      reset();
+      const { isAuthenticated } = response.data;
+      if (isAuthenticated) {
+        reset();
+      }
+      console.log(isAuthenticated);
     }
   };
 

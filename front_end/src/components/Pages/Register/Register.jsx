@@ -17,6 +17,7 @@ function Register() {
 
   const onSubmit = async (data) => {
     if (data.fName) {
+      //send data to backend
       const response = await axios.post(
         "http://localhost:4000/registration",
         data,
@@ -27,8 +28,6 @@ function Register() {
       console.log(response);
       reset();
     }
-
-    //send data to backend
   };
 
   return (

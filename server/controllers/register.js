@@ -1,5 +1,5 @@
 const BaseRoute = require("./baseRoute");
-const bcrypt = require("bcrypt");
+const NewUser = require("./newUser");
 // create a class for the user registration and extend the base route class to inherit the router
 class UserRegistration extends BaseRoute {
   constructor() {
@@ -12,7 +12,13 @@ class UserRegistration extends BaseRoute {
     // access the getRouter method from the baseRoute class and create a post route
     super.getRouter().post("/", async (request, response) => {
       try {
-        response.send("Registering a new user");
+        const { fName, lName, email, password } = request.body;
+        // create a new user
+        await new NewUser(fName, lName, email, password).createUser();
+        // send a response to the client
+        response.status(201).json({
+          message: "Account created successfully",
+        });
       } catch (error) {
         console.log(error);
       }

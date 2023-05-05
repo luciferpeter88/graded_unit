@@ -35,5 +35,5 @@ class UserLogin extends BaseRoute {
     });
   }
 }
-
+// export the user login class and instantiate it immediately
 module.exports = new UserLogin();

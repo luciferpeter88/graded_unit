@@ -12,6 +12,7 @@ class UserRegistration extends BaseRoute {
     // access the getRouter method from the baseRoute class and create a post route
     super.getRouter().post("/", async (request, response) => {
       try {
+        // destructure the request body
         const { fName, lName, email, password } = request.body;
         // create a new user
         await new NewUser(fName, lName, email, password).createUser();
@@ -25,5 +26,5 @@ class UserRegistration extends BaseRoute {
     });
   }
 }
-
+// export the user registration class and instantiate it immediately
 module.exports = new UserRegistration();

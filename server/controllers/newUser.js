@@ -16,7 +16,7 @@ class NewUser {
   }
   async hashPassword() {
     try {
-      const saltRounds = 10; // You can adjust this number based on your security requirements
+      const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(this.password, saltRounds);
       return hashedPassword;
     } catch (err) {

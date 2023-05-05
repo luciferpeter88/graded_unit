@@ -1,29 +1,43 @@
-import React from "react";
+import React, { useContext } from "react";
 import signIn from "../../../assets/images/login&registration/test.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../UI/login&registration/Input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import useAuthContext from "../../../context_Reducer/auth/authContext";
 
 function SignIn() {
+  const navigate = useNavigate();
+  const { authDispatch, authState } = useContext(useAuthContext);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-
   const onSubmit = async (data) => {
     if (data.email) {
       //send data to backend
       const response = await axios.post("http://localhost:4000/login", data, {
         withCredentials: true,
       });
-      const { isAuthenticated } = response.data;
-      if (isAuthenticated) {
+      // save the response from the server in a variable
+      const serverResponse = response.data;
+      // if the user is authenticated, reset the form
+      if (serverResponse.isAuthenticated) {
         reset();
       }
-      console.log(isAuthenticated);
+      // dispatch the user data to the auth context
+      authDispatch({ type: "LOGIN", payload: serverResponse });
+
+      // redirect the user to the profile or admin page based on the role
+      if (serverResponse.role === "admin") {
+        return navigate("/dashboard");
+      } else if (serverResponse.role === "user") {
+        return navigate("/profile");
+      } else {
+        return navigate("/login");
+      }
     }
   };
 
@@ -34,6 +48,11 @@ function SignIn() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className=" lg:w-1/2 flex flex-col justify-center gap-y-7">
+          {authState.loggedIn === "No" ? (
+            <p className="text-red-500 text-center">{authState.response}</p>
+          ) : (
+            ""
+          )}
           <h1 className="text-green-900  body-font font-bold text-2xl lg:text-4xl text-center">
             Login
           </h1>

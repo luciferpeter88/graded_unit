@@ -3,11 +3,9 @@ import { Navigate } from "react-router-dom";
 import useAuth from "../../../../context_Reducer/auth/authContext";
 
 function ProtectedAdmin({ children }) {
-  const data = useContext(useAuth);
-  console.log(data);
-  const loggedIn = true;
+  const { authState } = useContext(useAuth);
 
-  if (loggedIn) {
+  if (authState.isAuthenticated) {
     return <React.Fragment>{children}</React.Fragment>;
   } else {
     return <Navigate to="/login" />;

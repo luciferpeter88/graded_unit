@@ -36,7 +36,7 @@ function Profile() {
             Peter Kaszap Nagy
           </h1>
           <p className=" text-lg text-center text-gray-500">
-            Status: <span className=" text-red-900">Inactive</span>
+            Status: <span className=" text-red-900">Pending</span>
           </p>
           <button
             className="  text-white bg-green-900 py-1 px-4 h-10 w-32 rounded font-medium "

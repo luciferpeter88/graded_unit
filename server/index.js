@@ -9,6 +9,7 @@ require("./config/database");
 // Import the routes
 const registration = require("./controllers/register");
 const login = require("./controllers/login");
+const profile = require("./controllers/profile");
 // inmitiate the global middlewares
 new GlobalMiddlewares(express);
 
@@ -17,6 +18,7 @@ express.use("/login", login.getRouter());
 
 // create a route for the registration page
 express.use("/registration", registration.getRouter());
+express.use("/profile", profile.getRouter());
 
 const PORT = process.env.PORT || 4000;
 express.listen(PORT, () => {

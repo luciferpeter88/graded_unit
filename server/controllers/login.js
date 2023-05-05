@@ -24,7 +24,10 @@ class UserLogin extends BaseRoute {
         if (hasPasswordVerified) {
           // set the session user to the getUser, to access the user details in the session from another route
           request.session.user = getUser;
-          response.send({ isAuthenticated: true });
+          response.send({
+            isAuthenticated: true,
+            role: getUser.role,
+          });
         } else {
           // if the password is not verified, the authentication failed
           response.send({ isAuthenticated: false });

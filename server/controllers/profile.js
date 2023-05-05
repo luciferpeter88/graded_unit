@@ -10,16 +10,24 @@ class UserProfile extends BaseRoute {
   initializeRoutes() {
     // access the getRouter method from the baseRoute class and create a get route
     super.getRouter().get("/", async (request, response) => {
-      try {
-        if (!request.session.user) {
-          response.send({ isAuthenticated: false });
-        } else {
-          response.send(request.session.user);
-        }
-      } catch (error) {
-        console.log(error);
-      }
+      // invoke the getsessionData method
+      this.getsessionData(request, response);
     });
+  }
+  // create a method to get the session data
+  getsessionData(request, response) {
+    try {
+      // if the session user is not set, send a response to the client
+      if (!request.session.user) {
+        response.send({ isAuthenticated: false });
+      } else {
+        // if the session user is set, destructure the password from the session user and send a response to the client
+        const { password, ...userWithoutPassword } = request.session.user;
+        response.send(userWithoutPassword);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 // export the user registration class and instantiate it immediately

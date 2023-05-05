@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Input from "../../../UI/shared/Input";
+import profileContext from "../../../../services/Profile/profileContext";
 
 function EditProfile() {
+  const data = useContext(profileContext);
+  console.log(data);
   return (
     <div className="w-full">
       <div className="bg-white  rounded-lg flex flex-col gap-y-3 shadow dark:bg-gray-800 dark:border-gray-700 drop-shadow-lg p-5 items-start">

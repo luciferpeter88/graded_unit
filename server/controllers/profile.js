@@ -8,22 +8,38 @@ class UserProfile extends BaseRoute {
   }
   // create a method to initialize the routes
   initializeRoutes() {
-    // access the getRouter method from the baseRoute class and create a get route
-    super.getRouter().get("/", async (request, response) => {
+    // access the getRouter method from the baseRoute class and create a get route to retrieve the user profile data from the database that is stored in the session
+    super.getRouter().get("/details", async (request, response) => {
       // invoke the getsessionData method
-      this.getsessionData(request, response);
+      response.send(this.getsessionData(request));
     });
+    // access the getRouter method from the baseRoute class and create a put  route to update the user profile
+    super.getRouter().put("/details", async (request, response) => {
+      // console.log(request.body);
+      // response.send(request.body);
+    });
+    // access the getRouter method from the baseRoute class and create a get route to retrieve the pictures data from the database that is stored in the session
+    super.getRouter().get("/pictures", async (request, response) => {
+      response.send({ ...this.getsessionData(request) });
+    });
+    // access the getRouter method from the baseRoute class and create a put route to update the pictures
+    super.getRouter().put("/pictures", async (request, response) => {});
+    // access the getRouter method from the baseRoute class and create a get route to retrieve the booking data from the database that is stored in the session
+    super.getRouter().get("/booking", async (request, response) => {});
+    // access the getRouter method from the baseRoute class and create a put route to update the booking
+    super.getRouter().put("/booking", async (request, response) => {});
   }
+
   // create a method to get the session data
-  getsessionData(request, response) {
+  getsessionData(request) {
     try {
-      // if the session user is not set, send a response to the client
-      if (!request.session.user) {
-        response.send({ isAuthenticated: false });
+      // if the session isAuthenticated is not set, send a response to the client
+      if (!request.session.isAuthenticated) {
+        return { isAuthenticated: false };
       } else {
         // if the session user is set, destructure the password from the session user and send a response to the client
         const { password, ...userWithoutPassword } = request.session.user;
-        response.send(userWithoutPassword);
+        return userWithoutPassword;
       }
     } catch (error) {
       console.log(error);

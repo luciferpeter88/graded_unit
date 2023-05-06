@@ -17,9 +17,16 @@ import {
 import Modal from "../../../UI/dashboard/helper/Modal";
 import Box from "../../../UI/dashboard/helper/Box";
 import profileContext from "../../../../context_Reducer/profile/profileContext";
+import profileServicesContext from "../../../../services/Profile/profileContext";
 
 function Profile() {
+  // open or close the modal
   const { profileDispatch } = useContext(profileContext);
+  // get the profile details from the context
+  const {
+    profileStateServices: { profileDetails },
+  } = useContext(profileServicesContext);
+  // handle the click event on the edit button
   function handleclick(e) {
     profileDispatch({ type: "OPEN_MODAL", payload: e.target.id });
   }
@@ -29,14 +36,19 @@ function Profile() {
         <div className=" flex flex-col gap-y-5 items-center">
           <img
             className="w-48 h-48 object-cover rounded-full mx-auto mb-2"
-            src="http://bootdey.com/img/Content/avatar/avatar1.png"
+            src={
+              profileDetails.hasData ? profileDetails.data.profilePicture : null
+            }
             alt=""
           />
           <h1 className=" text-2xl text-gray-500 font-medium">
-            Peter Kaszap Nagy
+            {profileDetails.hasData ? profileDetails.data.userName : null}
           </h1>
           <p className=" text-lg text-center text-gray-500">
-            Status: <span className=" text-red-900">Pending</span>
+            Status:{" "}
+            <span className=" text-red-900">
+              {profileDetails.hasData ? profileDetails.data.status : null}
+            </span>
           </p>
           <button
             className="  text-white bg-green-900 py-1 px-4 h-10 w-32 rounded font-medium "

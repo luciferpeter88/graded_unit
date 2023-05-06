@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   userName: String,
   phoneNumber: Number,
   profilePicture: String,
+  about: String,
   avaibility: [{ title: String, start: Date, end: Date, description: String }],
 });
 

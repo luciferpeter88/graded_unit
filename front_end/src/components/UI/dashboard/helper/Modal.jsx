@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import ModalInner from "./ModalInner";
 import profileContext from "../../../../context_Reducer/profile/profileContext";
 import ModalHeader from "./ModalHeader";
+import ModalFooter from "./ModalFooter";
 
 function Modal() {
-  const { profileState, profileDispatch } = useContext(profileContext);
+  const { profileState } = useContext(profileContext);
   return (
     <React.Fragment>
       {profileState.showModal ? (
@@ -22,22 +23,7 @@ function Modal() {
                   <ModalInner />
                 </div>
                 {/*footer*/}
-                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => profileDispatch({ type: "CLOSE_MODAL" })}
-                  >
-                    Close
-                  </button>
-                  <button
-                    className="bg-green-900 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => profileDispatch({ type: "CLOSE_MODAL" })}
-                  >
-                    Save Changes
-                  </button>
-                </div>
+                <ModalFooter />
               </div>
             </div>
           </div>

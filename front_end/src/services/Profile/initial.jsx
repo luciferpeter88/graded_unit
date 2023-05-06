@@ -1,7 +1,21 @@
-// this is the initial state of the auth context by default the login state is false and the role is empty
+// this is the initial state of the profile reducer, the profile reducer is going to handle the incoming data from the server
 const initialState = {
-  hasData: false,
-  data: [],
+  profileDetails: {
+    hasData: false,
+    data: [],
+  },
+  profilePictures: {
+    hasData: false,
+    data: [],
+  },
+  profileBooking: {
+    hasData: false,
+    data: [],
+  },
+  profileEvetns: {
+    hasData: false,
+    data: [],
+  },
 };
 
 export default initialState;

@@ -6,6 +6,7 @@ import Pictures from "./Pictures";
 import Appointment from "./Appointment";
 
 function ModalInner() {
+  // get the state from the context
   const { profileState } = useContext(profileContext);
   // write a switch statement to render the appropriate component
   switch (profileState.id) {

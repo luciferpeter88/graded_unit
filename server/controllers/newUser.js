@@ -12,6 +12,7 @@ class NewUser {
     this.userName = "";
     this.phoneNumber = "";
     this.profilePicture = "";
+    this.about = "";
     this.avaibility = [];
   }
   async hashPassword() {
@@ -38,6 +39,7 @@ class NewUser {
         userName: this.userName,
         phoneNumber: this.phoneNumber,
         profilePicture: this.profilePicture,
+        about: this.about,
         avaibility: this.avaibility,
       });
       await newUser.save();

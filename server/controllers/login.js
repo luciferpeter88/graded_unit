@@ -24,6 +24,8 @@ class UserLogin extends BaseRoute {
         if (hasPasswordVerified) {
           // set the session user to the getUser, to access the user details in the session from another route
           request.session.user = getUser;
+          // set the isAuthenticated to true, to access the user details in the session from another route
+          request.session.isAuthenticated = true;
           response.send({
             isAuthenticated: true,
             role: getUser.role,

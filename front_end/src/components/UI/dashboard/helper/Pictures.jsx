@@ -11,6 +11,7 @@ import makingRequest from "../../../../services/request/makingRequest";
 function Pictures() {
   const { profileDispatchServices, profileStateServices } =
     useContext(profileContext);
+  // make a get request to the server immediately the component is mounted to get the profile pictures
   useEffect(() => {
     makingRequest(
       "get",
@@ -18,7 +19,7 @@ function Pictures() {
       profileDispatchServices,
       "GET_PICTURES"
     );
-  }, []);
+  }, [profileDispatchServices]);
 
   // these are dummy data for the tab component
   let headerText = [

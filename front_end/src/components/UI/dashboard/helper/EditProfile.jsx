@@ -7,7 +7,7 @@ function EditProfile() {
   // get the profile details from the context
   const { profileDispatchServices, profileStateServices } =
     useContext(profileContext);
-  // make a request to the server to get the profile details
+  // make a get request to the server immediately the component is mounted to get the profile details
   useEffect(() => {
     makingRequest(
       "get",
@@ -20,6 +20,32 @@ function EditProfile() {
   const {
     profileDetails: { hasData, data },
   } = profileStateServices;
+  // collect the data from the input fields
+  function collectData(event) {
+    // get the name and the type of the input field
+    const { name, type } = event.target;
+    // upload the profile picture
+    if (type === "file") {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          profileDispatchServices({
+            type: "UPDATE_PROFILE",
+            payload: { name, value: reader.result },
+          });
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+    // update the profile details
+    else {
+      profileDispatchServices({
+        type: "UPDATE_PROFILE",
+        payload: { name, value: event.target.value },
+      });
+    }
+  }
 
   return (
     <React.Fragment>
@@ -28,19 +54,29 @@ function EditProfile() {
           <div className="text-green-900 font-semibold text-center text-xl">
             Profile Details
           </div>
-          <div className="text-center">
+          <div className="flex">
             <img
               className="w-24 h-24 object-cover rounded-full mx-auto mb-2"
-              src={hasData ? data.profilePicture : null}
+              src={hasData ? data.profilePicture : ""}
               alt=""
             />
-            <button>Upload</button>
+            <input
+              type="file"
+              name="profilePicture"
+              accept="image/*"
+              onChange={collectData}
+            />
           </div>
-          <div>
+          <div className=" w-full px-3">
             <h3 className="text-green-900 text-sm font-semibold">About Me</h3>
-            <p className=" text-gray-500 mt-3 w-[90%]">
-              {hasData ? data.about : null}
-            </p>
+            <textarea
+              cols="30"
+              rows="10"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mt-3"
+              value={hasData ? data.about : ""}
+              name="about"
+              onChange={collectData}
+            ></textarea>
           </div>
           <form>
             <div className="flex flex-wrap mt-5 gap-y-3">
@@ -49,28 +85,34 @@ function EditProfile() {
                 id="inputFirstName"
                 type="text"
                 placeholder="Jane"
-                defaultValue={hasData ? data.firstName : null}
+                defaultValue={hasData ? data.firstName : ""}
+                name="firstName"
+                change={collectData}
               />
               <Input
                 label="Last name"
                 id="inputLastName"
                 type="text"
                 placeholder="Smith"
-                defaultValue={hasData ? data.lastName : null}
+                defaultValue={hasData ? data.lastName : ""}
+                name="lastName"
+                change={collectData}
               />
               <Input
                 label="Username"
                 id="username"
                 type="text"
                 placeholder="Jane"
-                defaultValue={hasData ? data.userName : null}
+                defaultValue={hasData ? data.userName : ""}
+                name="userName"
+                change={collectData}
               />
               <Input
                 label="Email"
                 id="email"
                 type="text"
                 placeholder="jane@gmail.com"
-                defaultValue={hasData ? data.email : null}
+                defaultValue={hasData ? data.email : ""}
                 readonly="readOnly"
               />
               <Input
@@ -78,14 +120,16 @@ function EditProfile() {
                 id="phoneNum"
                 type="tel"
                 placeholder="07401772020"
-                defaultValue={hasData ? data.phoneNumber : null}
+                defaultValue={hasData ? data.phoneNumber : ""}
+                name="phoneNumber"
+                change={collectData}
               />
               <Input
                 htmlFor="status"
                 label="Status"
                 id="status"
                 type="text"
-                defaultValue={hasData ? data.status : null}
+                defaultValue={hasData ? data.status : ""}
                 readonly="readOnly"
               />
             </div>

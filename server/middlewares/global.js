@@ -13,8 +13,8 @@ class GlobalMiddlewares {
   }
 
   setup() {
-    this.app.use(bodyParser.urlencoded({ extended: false }));
-    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.json({ limit: "50mb" }));
+    this.app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
     this.app.use(cookieParser());
     this.app.use(
       cors({
@@ -35,7 +35,7 @@ class GlobalMiddlewares {
       })
     );
 
-    this.app.use(express.static("pictures"));
+    this.app.use(express.static("uploads"));
   }
 }
 

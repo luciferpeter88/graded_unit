@@ -8,6 +8,8 @@ function Input({
   defaultValue,
   inputType,
   readonly,
+  name,
+  change,
 }) {
   const options = [
     { value: "Approved" },
@@ -40,8 +42,10 @@ function Input({
           id={id}
           type={type}
           placeholder={placeholder}
-          defaultValue={defaultValue}
+          value={defaultValue || ""}
           readOnly={readonly}
+          name={name}
+          onChange={change}
         />
       )}
     </div>

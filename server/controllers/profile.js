@@ -1,4 +1,6 @@
 const BaseRoute = require("./baseRoute");
+const updateUser = require("../controllers/updateUser");
+const ImageUploader = require("../middlewares/uploadProfilePicture");
 // create a class for the user registration and extend the base route class to inherit the router
 class UserProfile extends BaseRoute {
   constructor() {
@@ -15,8 +17,18 @@ class UserProfile extends BaseRoute {
     });
     // access the getRouter method from the baseRoute class and create a put  route to update the user profile
     super.getRouter().put("/details", async (request, response) => {
-      // console.log(request.body);
-      // response.send(request.body);
+      console.log(request.body);
+
+      const { _id, profilePicture, ...rest } = request.body;
+      // invoke the updateUser class and pass in the user id and the rest of the data to be updated
+      const update = new updateUser(_id, rest);
+      // invoke the updateUser method
+      await update.updateUser();
+      const imageUploader = new ImageUploader();
+      await imageUploader.saveImageFromData(profilePicture, "test.png");
+      // invoke the updateSessionData method and pass in the request and the rest of the data to be updated
+      this.updateSessionData(request, rest);
+      response.send(this.getsessionData(request));
     });
     // access the getRouter method from the baseRoute class and create a get route to retrieve the pictures data from the database that is stored in the session
     super.getRouter().get("/pictures", async (request, response) => {
@@ -41,6 +53,20 @@ class UserProfile extends BaseRoute {
         const { password, ...userWithoutPassword } = request.session.user;
         return userWithoutPassword;
       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // create a method to update the session data
+  updateSessionData(request, overwrittenData) {
+    try {
+      this.getsessionData(request);
+      const newSessionData = {
+        ...this.getsessionData(request),
+        ...overwrittenData,
+      };
+
+      return (request.session.user = newSessionData);
     } catch (error) {
       console.log(error);
     }

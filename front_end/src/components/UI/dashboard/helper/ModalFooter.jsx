@@ -8,18 +8,21 @@ function ModalFooter() {
   // close the modal
   const { profileState, profileDispatch } = useContext(profileContext);
   // making a request to the server to update the profile details so the user can edit his profile
-  const { profileDispatchServices } = useContext(profileContextServices);
+  const { profileDispatchServices, profileStateServices } = useContext(
+    profileContextServices
+  );
   // make a request to the server to the server based on the type of modal
-  function update(id) {
+  function update() {
     profileDispatch({ type: "CLOSE_MODAL" });
     makingRequest(
       "put",
       "http://localhost:4000/profile/details",
       profileDispatchServices,
-      "UPDATE_PROFILE",
-      { test: "test" }
+      "UPDATE_PROFILE_EDIT_SERVER",
+      profileStateServices.profileDetails.data
     );
   }
+
   function close() {
     profileDispatch({ type: "CLOSE_MODAL" });
   }

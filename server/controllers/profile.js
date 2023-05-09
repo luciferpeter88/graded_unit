@@ -20,14 +20,20 @@ class UserProfile extends BaseRoute {
       console.log(request.body);
 
       const { _id, profilePicture, ...rest } = request.body;
+      // upload image
+      const imageUploader = new ImageUploader(profilePicture, _id);
+      // get the image path
+      const imagePath = await imageUploader.saveImageFromData();
       // invoke the updateUser class and pass in the user id and the rest of the data to be updated
-      const update = new updateUser(_id, rest);
-      // invoke the updateUser method
+      const update = new updateUser(_id, {
+        ...rest,
+        profilePicture: imagePath,
+      });
+      // invoke the updateUser method to save the changes in the database
       await update.updateUser();
-      const imageUploader = new ImageUploader();
-      await imageUploader.saveImageFromData(profilePicture, "test.png");
       // invoke the updateSessionData method and pass in the request and the rest of the data to be updated
-      this.updateSessionData(request, rest);
+      this.updateSessionData(request, { ...rest, profilePicture: imagePath });
+      // send back the updated data to the user
       response.send(this.getsessionData(request));
     });
     // access the getRouter method from the baseRoute class and create a get route to retrieve the pictures data from the database that is stored in the session

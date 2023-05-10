@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   role: String,
   status: String,
   userName: String,
-  phoneNumber: Number,
+  phoneNumber: String,
   profilePicture: String,
   about: String,
   avaibility: [{ title: String, start: Date, end: Date, description: String }],

@@ -14,6 +14,7 @@ function ModalFooter() {
   // make a request to the server to the server based on the type of modal
   function update() {
     profileDispatch({ type: "CLOSE_MODAL" });
+    // this need to be refactored,(arguements)
     makingRequest(
       "put",
       "http://localhost:4000/profile/details",

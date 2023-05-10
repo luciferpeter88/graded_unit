@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   ScheduleComponent,
   Day,
@@ -18,18 +18,30 @@ import Modal from "../../../UI/dashboard/helper/Modal";
 import Box from "../../../UI/dashboard/helper/Box";
 import profileContext from "../../../../context_Reducer/profile/profileContext";
 import profileServicesContext from "../../../../services/Profile/profileContext";
+import makingRequest from "../../../../services/request/makingRequest";
 
 function Profile() {
   // open or close the modal
   const { profileDispatch } = useContext(profileContext);
-  // get the profile details from the context
+  // get the profile details from the context and the profile services context to make a get request to the server
   const {
+    profileDispatchServices,
     profileStateServices: { profileDetails },
   } = useContext(profileServicesContext);
-  // handle the click event on the edit button
+  // handle the click event on the edit and box component, so as to open the modal and pass the id of the component clicked to the reducer to know which component to render
   function handleclick(e) {
     profileDispatch({ type: "OPEN_MODAL", payload: e.target.id });
   }
+  // make a get request to the server immediately the component is mounted to get the profile details
+  useEffect(() => {
+    makingRequest(
+      "get",
+      "http://localhost:4000/profile/details",
+      profileDispatchServices,
+      "GET_PROFILE"
+    );
+  }, []);
+
   return (
     <div className=" grid grid-cols-1 md:grid-cols-2 grid-rows-5 md:grid-rows-3 xl:grid-cols-4  min-h-screen gap-5 p-5 overflow-hidden">
       <div className=" row-span-2 md:row-span-3   bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-center items-center py-3 drop-shadow-lg">

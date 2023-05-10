@@ -15,6 +15,7 @@ function EditProfile() {
       profileDispatchServices,
       "GET_PROFILE"
     );
+    // eslint-disable-next-line
   }, []);
   // destructure the profile details from the state
   const {

@@ -40,6 +40,7 @@ function Profile() {
       profileDispatchServices,
       "GET_PROFILE"
     );
+    // eslint-disable-next-line
   }, []);
 
   return (

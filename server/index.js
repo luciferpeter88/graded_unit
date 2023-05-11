@@ -7,9 +7,9 @@ require("dotenv").config();
 // Import the database connection
 require("./config/database");
 // Import the routes
-const registration = require("./controllers/register");
-const login = require("./controllers/login");
-const profile = require("./controllers/profile");
+const registration = require("./controllers/routes/Users/register");
+const login = require("./controllers/routes/Users/login");
+const profile = require("./controllers/routes/Users/profile");
 // inmitiate the global middlewares
 new GlobalMiddlewares(express);
 

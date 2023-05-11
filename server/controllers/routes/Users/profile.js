@@ -1,6 +1,6 @@
-const BaseRoute = require("./baseRoute");
-const updateUser = require("../controllers/updateUser");
-const ImageUploader = require("../middlewares/uploadProfilePicture");
+const BaseRoute = require("../shared/baseRoute");
+const updateUser = require("../../classes/users/update/profile/updateUser");
+const ImageUploader = require("../../classes/users/update/profile/uploadProfilePicture");
 // create a class for the user registration and extend the base route class to inherit the router
 class UserProfile extends BaseRoute {
   constructor() {

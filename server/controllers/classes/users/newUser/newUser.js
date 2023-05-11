@@ -1,4 +1,4 @@
-const User = require("../models/user");
+const User = require("../../../../models/user");
 const bcrypt = require("bcrypt");
 // create a class for creating a new user and save to the database
 class NewUser {

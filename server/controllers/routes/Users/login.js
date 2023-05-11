@@ -1,5 +1,5 @@
-const BaseRoute = require("./baseRoute");
-const Authentification = require("./auth");
+const BaseRoute = require("../shared/baseRoute");
+const Authentification = require("../../authentication/auth");
 // create a class for the user login and extend the base route class to inherit the router
 class UserLogin extends BaseRoute {
   constructor() {

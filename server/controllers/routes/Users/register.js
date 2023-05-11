@@ -1,5 +1,5 @@
-const BaseRoute = require("./baseRoute");
-const NewUser = require("./newUser");
+const BaseRoute = require("../shared/baseRoute");
+const NewUser = require("../../classes/users/newUser/newUser");
 // create a class for the user registration and extend the base route class to inherit the router
 class UserRegistration extends BaseRoute {
   constructor() {

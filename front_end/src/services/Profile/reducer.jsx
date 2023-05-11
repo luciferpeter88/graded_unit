@@ -14,7 +14,7 @@ function reducer(state, action) {
       },
     };
   }
-  // update the states based on the user input
+  // update the states based on the user , without making a request to the server
   if (action.type === "UPDATE_PROFILE") {
     return {
       ...state,
@@ -29,14 +29,13 @@ function reducer(state, action) {
       },
     };
   }
-
+  // making a request to the server to update the profile details so the user can edit his profile
   if (action.type === "UPDATE_PROFILE_EDIT_SERVER") {
-    console.log(action.payload, "payload");
-
     return {
       ...state,
       profileDetails: {
         ...state.profileDetails,
+        // overwrite the dataFromServer with the data that came from the server, so the user can see the changes that he made
         dataFromServer: action.payload,
         data: {
           ...state.profileDetails.data,

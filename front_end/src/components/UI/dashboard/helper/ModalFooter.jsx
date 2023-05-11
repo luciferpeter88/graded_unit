@@ -12,16 +12,10 @@ function ModalFooter() {
     profileContextServices
   );
   // make a request to the server to the server based on the type of modal
-  function update() {
+  function update(reqType, url, dispatch, dispatchType, data) {
     profileDispatch({ type: "CLOSE_MODAL" });
-    // this need to be refactored,(arguements)
-    makingRequest(
-      "put",
-      "http://localhost:4000/profile/details",
-      profileDispatchServices,
-      "UPDATE_PROFILE_EDIT_SERVER",
-      profileStateServices.profileDetails.data
-    );
+    // function to make a request to the server
+    makingRequest(reqType, url, dispatch, dispatchType, data);
   }
 
   function close() {
@@ -33,23 +27,25 @@ function ModalFooter() {
       return (
         <Footer
           type={profileState.id}
-          senRequest={() => update()}
+          senRequest={() =>
+            update(
+              "put",
+              "http://localhost:4000/profile/details",
+              profileDispatchServices,
+              "UPDATE_PROFILE_EDIT_SERVER",
+              profileStateServices.profileDetails.data
+            )
+          }
           closeModal={close}
         />
       );
     case "apply":
-      return (
-        <Footer
-          type={profileState.id}
-          senRequest={() => update()}
-          closeModal={close}
-        />
-      );
+      return <Footer type={profileState.id} closeModal={close} />;
     case "pictures":
       return (
         <Footer
           type={profileState.id}
-          senRequest={() => update()}
+          // senRequest={() => update()}
           closeModal={close}
         />
       );
@@ -57,7 +53,7 @@ function ModalFooter() {
       return (
         <Footer
           type={profileState.id}
-          senRequest={() => update()}
+          // senRequest={() => update()}
           closeModal={close}
         />
       );

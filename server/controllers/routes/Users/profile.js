@@ -59,8 +59,11 @@ class UserProfile extends BaseRoute {
     super.getRouter().post("/pictures", async (request, response) => {
       // instantiate the session class and get the user id
       const sessionClass = new Session();
+      // get the user id
       const id = sessionClass.getsessionData(request)._id;
-
+      // instantiate the UploadedPictures class and pass in the user id and the request body
+      // the request body contains the image data
+      // the user id is used to create a folder for the user in the uploads folder and store it in the database to determine who the image belongs to
       const imageUpload = new UploadedPictures(id, request.body);
       // wait for the image to be uploaded and saved before sending a response
       const res = await imageUpload.saveImage();

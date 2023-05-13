@@ -11,6 +11,7 @@ const initialState = {
   profilePictures: {
     hasData: false,
     data: [],
+    formData: [],
   },
   profileBooking: {
     hasData: false,

@@ -1,6 +1,8 @@
 const BaseRoute = require("../shared/baseRoute");
 const updateUser = require("../../classes/users/update/profile/updateUser");
 const ImageUploader = require("../../classes/users/update/profile/uploadProfilePicture");
+const Session = require("../../classes/users/update/profile/session");
+const UploadedPictures = require("../../classes/users/update/pictures/uploadPicture");
 // create a class for the user registration and extend the base route class to inherit the router
 class UserProfile extends BaseRoute {
   constructor() {
@@ -12,12 +14,16 @@ class UserProfile extends BaseRoute {
   initializeRoutes() {
     // access the getRouter method from the baseRoute class and create a get route to retrieve the user profile data from the database that is stored in the session
     super.getRouter().get("/details", async (request, response) => {
-      // invoke the getsessionData method
-      response.send(this.getsessionData(request));
+      // instantiate the session class
+      const sessionClass = new Session();
+      // get the session data
+      sessionClass.getsessionData(request);
+      // send back the session data to the user
+      response.send(sessionClass.getsessionData(request));
     });
     // access the getRouter method from the baseRoute class and create a put  route to update the user profile
     super.getRouter().put("/details", async (request, response) => {
-      console.log(request.body);
+      // console.log(request.body);
 
       const { _id, profilePicture, ...rest } = request.body;
       // upload image
@@ -31,51 +37,39 @@ class UserProfile extends BaseRoute {
       });
       // invoke the updateUser method to save the changes in the database
       await update.updateUser();
+      // instantiate the session class
+      const sessionClass = new Session();
       // invoke the updateSessionData method and pass in the request and the rest of the data to be updated
-      this.updateSessionData(request, { ...rest, profilePicture: imagePath });
+      sessionClass.updateSessionData(request, {
+        ...rest,
+        profilePicture: imagePath,
+      });
       // send back the updated data to the user
-      response.send(this.getsessionData(request));
+      response.send(sessionClass.getsessionData(request));
     });
     // access the getRouter method from the baseRoute class and create a get route to retrieve the pictures data from the database that is stored in the session
     super.getRouter().get("/pictures", async (request, response) => {
-      response.send({ ...this.getsessionData(request) });
+      // instantiate the session class
+      const sessionClass = new Session();
+      // console.log(request.body);
+      response.send("test");
+      // response.send({ ...sessionClass.getsessionData(request) });
     });
     // access the getRouter method from the baseRoute class and create a put route to update the pictures
-    super.getRouter().put("/pictures", async (request, response) => {});
+    super.getRouter().post("/pictures", async (request, response) => {
+      // instantiate the session class and get the user id
+      const sessionClass = new Session();
+      const id = sessionClass.getsessionData(request)._id;
+
+      const imageUpload = new UploadedPictures(id, request.body);
+      // wait for the image to be uploaded and saved before sending a response
+      const res = await imageUpload.saveImage();
+      response.send({ res });
+    });
     // access the getRouter method from the baseRoute class and create a get route to retrieve the booking data from the database that is stored in the session
     super.getRouter().get("/booking", async (request, response) => {});
     // access the getRouter method from the baseRoute class and create a put route to update the booking
     super.getRouter().put("/booking", async (request, response) => {});
-  }
-
-  // create a method to get the session data
-  getsessionData(request) {
-    try {
-      // if the session isAuthenticated is not set, send a response to the client
-      if (!request.session.isAuthenticated) {
-        return { isAuthenticated: false };
-      } else {
-        // if the session user is set, destructure the password from the session user and send a response to the client
-        const { password, ...userWithoutPassword } = request.session.user;
-        return userWithoutPassword;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  // create a method to update the session data
-  updateSessionData(request, overwrittenData) {
-    try {
-      this.getsessionData(request);
-      const newSessionData = {
-        ...this.getsessionData(request),
-        ...overwrittenData,
-      };
-
-      return (request.session.user = newSessionData);
-    } catch (error) {
-      console.log(error);
-    }
   }
 }
 // export the user registration class and instantiate it immediately

@@ -7,24 +7,26 @@ import {
 import "../../../../styles/dashboard/adminevents.css";
 import profileContext from "../../../../services/Profile/profileContext";
 import makingRequest from "../../../../services/request/makingRequest";
+import UploadPictures from "./UploadPictures";
 
 function Pictures() {
   const { profileDispatchServices, profileStateServices } =
     useContext(profileContext);
   // make a get request to the server immediately the component is mounted to get the profile pictures
-  useEffect(() => {
-    makingRequest(
-      "get",
-      "http://localhost:4000/profile/pictures",
-      profileDispatchServices,
-      "GET_PICTURES"
-    );
-  }, [profileDispatchServices]);
+  // useEffect(() => {
+  //   makingRequest(
+  //     "get",
+  //     "http://localhost:4000/profile/pictures",
+  //     profileDispatchServices,
+  //     "GET_PICTURES"
+  //   );
+  // }, [profileDispatchServices]);
 
   // these are dummy data for the tab component
   let headerText = [
     { text: "All Pictures" },
     { text: "My Pictures" },
+    { text: "Pending Pictures" },
     { text: "Declined Pictures" },
     { text: "Upload Picture" },
   ];
@@ -50,6 +52,7 @@ function Pictures() {
         <TabItemDirective header={headerText[1]} content={myPictures} />
         <TabItemDirective header={headerText[2]} content={myPictures} />
         <TabItemDirective header={headerText[3]} content={myPictures} />
+        <TabItemDirective header={headerText[4]} content={UploadPictures} />
       </TabItemsDirective>
     </TabComponent>
   );

@@ -43,6 +43,36 @@ function reducer(state, action) {
       },
     };
   }
+  if (action.type === "UPDATE_PROFILE_PICTURES") {
+    return {
+      ...state,
+      profilePictures: {
+        ...state.profilePictures,
+        data: [...state.profilePictures.data, ...action.payload],
+      },
+    };
+  }
+  if (action.type === "FORM_DATA") {
+    console.log(action.payload, "FORM_DATA");
+    return {
+      ...state,
+      profilePictures: {
+        ...state.profilePictures,
+        formData: action.payload,
+      },
+    };
+  }
+  if (action.type === "UPDATE_PROFILE_PICTURES_SERVER") {
+    console.log(action.payload, "UPDATE_PROFILE_PICTURES_SERVER");
+    return {
+      ...state,
+      // profilePictures: {
+      //   ...state.profilePictures,
+      //   data: action.payload,
+      // },
+    };
+  }
+
   if (action.type === "GET_PICTURES") {
     return {
       ...state,
@@ -52,7 +82,15 @@ function reducer(state, action) {
       },
     };
   }
-
+  // delete the data from the state when the modal is closed
+  if (action.type === "CLOSE_MODAL") {
+    return {
+      ...state,
+      profilePictures: {
+        data: [],
+      },
+    };
+  }
   return state;
 }
 

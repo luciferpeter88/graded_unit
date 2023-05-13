@@ -20,6 +20,7 @@ function ModalFooter() {
 
   function close() {
     profileDispatch({ type: "CLOSE_MODAL" });
+    profileDispatchServices({ type: "CLOSE_MODAL" });
   }
 
   switch (profileState.id) {
@@ -45,7 +46,15 @@ function ModalFooter() {
       return (
         <Footer
           type={profileState.id}
-          // senRequest={() => update()}
+          senRequest={() =>
+            update(
+              "post",
+              "http://localhost:4000/profile/pictures",
+              profileDispatchServices,
+              "UPDATE_PROFILE_PICTURES_SERVER",
+              profileStateServices.profilePictures.formData
+            )
+          }
           closeModal={close}
         />
       );

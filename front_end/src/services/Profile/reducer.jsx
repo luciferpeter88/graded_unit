@@ -43,11 +43,13 @@ function reducer(state, action) {
       },
     };
   }
+  // Pictures reducer from here
   if (action.type === "UPDATE_PROFILE_PICTURES") {
     return {
       ...state,
       profilePictures: {
         ...state.profilePictures,
+        // list the pictures that the user uploaded on the CLIENT SIDE!
         data: [...state.profilePictures.data, ...action.payload],
       },
     };
@@ -58,12 +60,14 @@ function reducer(state, action) {
       ...state,
       profilePictures: {
         ...state.profilePictures,
+        // converted pictures to base64 on THE CLIENT SIDE!
         formData: action.payload,
       },
     };
   }
   if (action.type === "UPDATE_PROFILE_PICTURES_SERVER") {
     console.log(action.payload, "UPDATE_PROFILE_PICTURES_SERVER");
+    // after the user sent the pictures to the server, we need to clear the data from the state to not display the same pictures again and not send false data to the server
     return {
       ...state,
       profilePictures: {
@@ -74,15 +78,15 @@ function reducer(state, action) {
     };
   }
 
-  if (action.type === "GET_PICTURES") {
-    return {
-      ...state,
-      profilePictures: {
-        hasData: true,
-        data: action.payload,
-      },
-    };
-  }
+  // if (action.type === "GET_PICTURES") {
+  //   return {
+  //     ...state,
+  //     profilePictures: {
+  //       hasData: true,
+  //       data: action.payload,
+  //     },
+  //   };
+  // }
   // delete the data from the state when the modal is closed
   if (action.type === "CLOSE_MODAL") {
     return {

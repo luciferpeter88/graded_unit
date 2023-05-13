@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const pictureSchema = new mongoose.Schema({
   userId: String,
   imagePath: String,
+  uploadedBy: String,
   status: String,
 });
 

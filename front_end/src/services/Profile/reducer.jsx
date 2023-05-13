@@ -66,10 +66,11 @@ function reducer(state, action) {
     console.log(action.payload, "UPDATE_PROFILE_PICTURES_SERVER");
     return {
       ...state,
-      // profilePictures: {
-      //   ...state.profilePictures,
-      //   data: action.payload,
-      // },
+      profilePictures: {
+        ...state.profilePictures,
+        data: [],
+        formData: [],
+      },
     };
   }
 
@@ -87,6 +88,7 @@ function reducer(state, action) {
     return {
       ...state,
       profilePictures: {
+        ...state.profilePictures,
         data: [],
       },
     };

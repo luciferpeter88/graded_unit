@@ -3,12 +3,12 @@ const path = require("path");
 const util = require("util");
 const Picture = require("../../../../../models/pictures");
 class UploadedPictures {
-  constructor(userId, picture) {
+  constructor(userId, picture, uploadedBy) {
     // if we don't have any pictures do not execute the rest of the code
     if (picture.length === 0 || !picture) {
-      this.response = "";
       return;
     }
+    this.uploadedBy = uploadedBy;
     // array of pictures
     this.uploadedPictures = [...picture];
     this.userId = userId;
@@ -69,6 +69,7 @@ class UploadedPictures {
         new Picture({
           userId: this.userId,
           imagePath: imageFullPath,
+          uploadedBy: this.uploadedBy,
           status: "pending",
         }).save();
         return "The image has been uploaded successfully";

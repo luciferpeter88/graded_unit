@@ -4,6 +4,11 @@ const util = require("util");
 const Picture = require("../../../../../models/pictures");
 class UploadedPictures {
   constructor(userId, picture) {
+    // if we don't have any pictures do not execute the rest of the code
+    if (picture.length === 0 || !picture) {
+      this.response = "";
+      return;
+    }
     // array of pictures
     this.uploadedPictures = [...picture];
     this.userId = userId;
@@ -32,6 +37,10 @@ class UploadedPictures {
   }
 
   async saveImage() {
+    // if we don't have any pictures do not execute the rest of the code
+    if (!this.outputDirectory) {
+      return;
+    }
     const writeFileAsync = util.promisify(fs.writeFile);
     const baseOutputDirectory = "./uploads/allPictures";
     // output directory is "./uploads/allPictures/userId

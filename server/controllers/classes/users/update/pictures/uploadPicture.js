@@ -64,7 +64,7 @@ class UploadedPictures {
         await writeFileAsync(outputFile, imageBuffer);
         const publicPath = path.relative("./uploads/allPictures", outputFile);
         // provide the full path to fetch the image
-        const imageFullPath = `http://localhost:4000/${publicPath}`;
+        const imageFullPath = `http://localhost:4000/allPictures/${publicPath}`;
 
         new Picture({
           userId: this.userId,

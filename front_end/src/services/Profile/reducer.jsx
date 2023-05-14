@@ -55,7 +55,7 @@ function reducer(state, action) {
     };
   }
   if (action.type === "FORM_DATA") {
-    console.log(action.payload, "FORM_DATA");
+    // console.log(action.payload, "FORM_DATA");
     return {
       ...state,
       profilePictures: {
@@ -66,7 +66,7 @@ function reducer(state, action) {
     };
   }
   if (action.type === "UPDATE_PROFILE_PICTURES_SERVER") {
-    console.log(action.payload, "UPDATE_PROFILE_PICTURES_SERVER");
+    // console.log(action.payload, "UPDATE_PROFILE_PICTURES_SERVER");
     // after the user sent the pictures to the server, we need to clear the data from the state to not display the same pictures again and not send false data to the server
     return {
       ...state,
@@ -77,16 +77,19 @@ function reducer(state, action) {
       },
     };
   }
-
-  // if (action.type === "GET_PICTURES") {
-  //   return {
-  //     ...state,
-  //     profilePictures: {
-  //       hasData: true,
-  //       data: action.payload,
-  //     },
-  //   };
-  // }
+  //  get the pictures from the server and display them on the UI
+  if (action.type === "GET_PICTURES") {
+    return {
+      ...state,
+      profilePictures: {
+        ...state.profilePictures,
+        // hasData is set to true because the data has been fetched from the server
+        hasData: true,
+        // the data that came from the server
+        dataFromServer: action.payload,
+      },
+    };
+  }
   // delete the data from the state when the modal is closed
   if (action.type === "CLOSE_MODAL") {
     return {

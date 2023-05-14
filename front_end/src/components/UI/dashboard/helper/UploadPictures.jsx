@@ -4,7 +4,7 @@ import profileContext from "../../../../services/Profile/profileContext";
 function UploadPictures() {
   const { profileDispatchServices, profileStateServices } =
     useContext(profileContext);
-  console.log(profileStateServices.profilePictures);
+  // console.log(profileStateServices.profilePictures);
   // function to handle the change of the input field
   const handleImageChange = async (e) => {
     if (e.target.files) {

@@ -3,6 +3,8 @@ const updateUser = require("../../classes/users/update/profile/updateUser");
 const ImageUploader = require("../../classes/users/update/profile/uploadProfilePicture");
 const Session = require("../../classes/users/update/profile/session");
 const UploadedPictures = require("../../classes/users/update/pictures/uploadPicture");
+const { connection } = require("mongoose");
+
 // create a class for the user registration and extend the base route class to inherit the router
 class UserProfile extends BaseRoute {
   constructor() {
@@ -49,10 +51,18 @@ class UserProfile extends BaseRoute {
     });
     // access the getRouter method from the baseRoute class and create a get route to retrieve the pictures data from the database that is stored in the session
     super.getRouter().get("/pictures", async (request, response) => {
+      // get all the pictures from the database
+      const getAllPictures = await connection.db
+        .collection("pictures")
+        .find()
+        .toArray();
+
       // instantiate the session class
       const sessionClass = new Session();
-      // console.log(request.body);
-      response.send("test");
+      // invoke the updateSessionData method and pass in the request and the pictures data to be updated
+      sessionClass.updateSessionData(request, { allPictures: getAllPictures });
+      // send back the updated data to the user
+      response.send(sessionClass.getsessionData(request));
       // response.send({ ...sessionClass.getsessionData(request) });
     });
     // access the getRouter method from the baseRoute class and create a put route to update the pictures

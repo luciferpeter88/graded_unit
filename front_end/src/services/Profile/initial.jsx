@@ -12,6 +12,7 @@ const initialState = {
     hasData: false,
     data: [],
     formData: [],
+    dataFromServer: [],
   },
   profileBooking: {
     hasData: false,

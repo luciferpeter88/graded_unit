@@ -12,7 +12,17 @@ const userSchema = new mongoose.Schema({
   phoneNumber: String,
   profilePicture: String,
   about: String,
-  avaibility: [{ title: String, start: Date, end: Date, description: String }],
+  avaibility: [
+    {
+      Subject: String,
+      Id: Number,
+      StartTime: String,
+      EndTime: String,
+      IsAllDay: Boolean,
+      Location: String,
+      Description: String,
+    },
+  ],
 });
 
 // Create a model for the users collection

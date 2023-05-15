@@ -1,3 +1,4 @@
+import DateConverter from "./converDate";
 function reducer(state, action) {
   // update the data state with the incoming data from the server and display it on the UI
   if (action.type === "GET_PROFILE") {
@@ -92,12 +93,17 @@ function reducer(state, action) {
   }
   // booking reducer from here
   if (action.type === "UPDATE_PROFILE_BOOKING_ADD") {
+    // convert the date to a format that the calendar can understand
+    const convertedFormat = action.payload.map((booking) => {
+      const convertDate = new DateConverter();
+      return convertDate.convert(booking);
+    });
     return {
       ...state,
       profileBooking: {
         ...state.profileBooking,
         // list the bookings that the user made on the CLIENT SIDE!
-        data: [...state.profileBooking.data, ...action.payload],
+        data: [...state.profileBooking.data, ...convertedFormat],
       },
     };
   }
@@ -120,7 +126,10 @@ function reducer(state, action) {
       (booking) => booking.Id !== action.payload[0].Id
     );
     // add the new item to the state
-    const editedItem = action.payload;
+    const editedItem = action.payload.map((booking) => {
+      const convertDate = new DateConverter();
+      return convertDate.convert(booking);
+    });
     return {
       ...state,
       profileBooking: {
@@ -130,7 +139,17 @@ function reducer(state, action) {
       },
     };
   }
-
+  if (action.type === "UPDATE_PROFILE_APPOINTMENT_SERVER") {
+    // writing the data to the server
+    return {
+      ...state,
+      profileBooking: {
+        ...state.profileBooking,
+        // clear the data from the state after the user sent the data to the server
+        data: [],
+      },
+    };
+  }
   // delete the data from the state when the modal is closed
   if (action.type === "CLOSE_MODAL") {
     return {

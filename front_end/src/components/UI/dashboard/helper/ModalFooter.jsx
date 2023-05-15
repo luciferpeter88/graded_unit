@@ -62,7 +62,15 @@ function ModalFooter() {
       return (
         <Footer
           type={profileState.id}
-          // senRequest={() => update()}
+          senRequest={() =>
+            update(
+              "post",
+              "http://localhost:4000/profile/booking",
+              profileDispatchServices,
+              "UPDATE_PROFILE_APPOINTMENT_SERVER",
+              profileStateServices.profileBooking.data
+            )
+          }
           closeModal={close}
         />
       );

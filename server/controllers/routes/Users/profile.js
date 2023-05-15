@@ -4,6 +4,7 @@ const ImageUploader = require("../../classes/users/update/profile/uploadProfileP
 const Session = require("../../classes/users/update/profile/session");
 const UploadedPictures = require("../../classes/users/update/pictures/uploadPicture");
 const { connection } = require("mongoose");
+const SaveAppointment = require("../../classes/users/update/appointment/saveAppointment");
 
 // create a class for the user registration and extend the base route class to inherit the router
 class UserProfile extends BaseRoute {
@@ -87,7 +88,15 @@ class UserProfile extends BaseRoute {
     // access the getRouter method from the baseRoute class and create a get route to retrieve the booking data from the database that is stored in the session
     super.getRouter().get("/booking", async (request, response) => {});
     // access the getRouter method from the baseRoute class and create a put route to update the booking
-    super.getRouter().put("/booking", async (request, response) => {});
+    super.getRouter().post("/booking", async (request, response) => {
+      const sessionClass = new Session();
+      // get the user id
+      const id = sessionClass.getsessionData(request)._id;
+      // pass in the user id and the request body to save the booking in the database
+      new SaveAppointment(id, request.body);
+      console.log(request.body);
+      response.send({ message: "booking" });
+    });
   }
 }
 // export the user registration class and instantiate it immediately

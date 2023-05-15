@@ -90,6 +90,47 @@ function reducer(state, action) {
       },
     };
   }
+  // booking reducer from here
+  if (action.type === "UPDATE_PROFILE_BOOKING_ADD") {
+    return {
+      ...state,
+      profileBooking: {
+        ...state.profileBooking,
+        // list the bookings that the user made on the CLIENT SIDE!
+        data: [...state.profileBooking.data, ...action.payload],
+      },
+    };
+  }
+  if (action.type === "UPDATE_PROFILE_BOOKING_DELETE") {
+    const filteredItems = state.profileBooking.data.filter(
+      (booking) => booking.Id !== action.payload
+    );
+    return {
+      ...state,
+      profileBooking: {
+        ...state.profileBooking,
+        // list the bookings that the user made on the CLIENT SIDE!
+        data: [...filteredItems],
+      },
+    };
+  }
+  if (action.type === "UPDATE_PROFILE_BOOKING_EDIT") {
+    // remove the old item from the state because we are going to overwrite it with the new one
+    let newItems = state.profileBooking.data.filter(
+      (booking) => booking.Id !== action.payload[0].Id
+    );
+    // add the new item to the state
+    const editedItem = action.payload;
+    return {
+      ...state,
+      profileBooking: {
+        ...state.profileBooking,
+        // list the bookings that the user made on the CLIENT SIDE!
+        data: [...newItems, ...editedItem],
+      },
+    };
+  }
+
   // delete the data from the state when the modal is closed
   if (action.type === "CLOSE_MODAL") {
     return {

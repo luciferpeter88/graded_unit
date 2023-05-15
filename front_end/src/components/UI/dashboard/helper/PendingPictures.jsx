@@ -26,15 +26,12 @@ function PendingPictures() {
                 className="border relative h-56 flex justify-center items-center"
               >
                 <img
-                  class="w-full h-full object-cover"
+                  className="w-full h-full object-cover"
                   src={picture.imagePath}
                   alt=""
                 />
                 <h2 className=" text-white font-medium absolute left-2 bottom-2">
-                  Uploaded by{" "}
-                  <span className="block font-medium">
-                    {picture.uploadedBy}
-                  </span>
+                  {picture.uploadedBy}
                 </h2>
               </div>
             ))

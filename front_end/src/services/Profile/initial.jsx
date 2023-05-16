@@ -17,6 +17,7 @@ const initialState = {
   profileBooking: {
     hasData: false,
     data: [],
+    dataFromServer: [],
   },
   profileEvetns: {
     hasData: false,

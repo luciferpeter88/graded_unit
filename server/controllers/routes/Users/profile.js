@@ -86,7 +86,12 @@ class UserProfile extends BaseRoute {
       response.send({ res });
     });
     // access the getRouter method from the baseRoute class and create a get route to retrieve the booking data from the database that is stored in the session
-    super.getRouter().get("/booking", async (request, response) => {});
+    super.getRouter().get("/booking", async (request, response) => {
+      // instantiate the session class
+      const sessionClass = new Session();
+      // send back the updated data to the user
+      response.send(sessionClass.getsessionData(request));
+    });
     // access the getRouter method from the baseRoute class and create a put route to update the booking
     super.getRouter().post("/booking", async (request, response) => {
       const sessionClass = new Session();
@@ -94,7 +99,7 @@ class UserProfile extends BaseRoute {
       const id = sessionClass.getsessionData(request)._id;
       // pass in the user id and the request body to save the booking in the database
       new SaveAppointment(id, request.body);
-      console.log(request.body);
+      sessionClass.updateSessionData(request, { avaibility: request.body });
       response.send({ message: "booking" });
     });
   }

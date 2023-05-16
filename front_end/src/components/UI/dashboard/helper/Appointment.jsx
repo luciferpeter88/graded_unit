@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   ScheduleComponent,
   Day,
@@ -10,6 +10,7 @@ import {
 } from "@syncfusion/ej2-react-schedule";
 import "../../../../styles/dashboard/adminevents.css";
 import profileContext from "../../../../services/Profile/profileContext";
+import makingRequest from "../../../../services/request/makingRequest";
 
 function Appointment() {
   const {
@@ -67,7 +68,24 @@ function Appointment() {
   //     Location: "Glasgow",
   //     Description: "Test",
   //   },
+  //   {
+  //     Id: 2,
+  //     Subject: "Meeting",
+  //     StartTime: new Date(2023, 5, 16),
+  //     EndTime: new Date(2023, 5, 16),
+  //     IsAllDay: true,
+  //     Location: "Glasgow",
+  //     Description: "Test",
+  //   },
   // ];
+  useEffect(() => {
+    makingRequest(
+      "get",
+      "http://localhost:4000/profile/booking",
+      profileDispatchServices,
+      "GET_APPOINTMENT"
+    );
+  }, [profileDispatchServices]);
   return (
     <div>
       <ScheduleComponent
@@ -75,7 +93,11 @@ function Appointment() {
         currentView="Month"
         popupOpen={onPopupOpen}
         actionBegin={onActionBegin}
-        // eventSettings={{ dataSource: data }}
+        eventSettings={{
+          dataSource: profileBooking.hasData
+            ? profileBooking.dataFromServer
+            : null,
+        }}
       >
         <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
       </ScheduleComponent>

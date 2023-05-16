@@ -20,7 +20,8 @@ class SaveAppointment {
         Description: appointment.Description || "",
       };
     });
-
+    // Empty the 'avaibility' array
+    await User.findByIdAndUpdate(this.id, { $set: { avaibility: [] } });
     // Update the document
     const update = {
       $push: {

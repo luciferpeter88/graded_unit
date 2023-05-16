@@ -56,7 +56,6 @@ function reducer(state, action) {
     };
   }
   if (action.type === "FORM_DATA") {
-    // console.log(action.payload, "FORM_DATA");
     return {
       ...state,
       profilePictures: {
@@ -67,7 +66,6 @@ function reducer(state, action) {
     };
   }
   if (action.type === "UPDATE_PROFILE_PICTURES_SERVER") {
-    // console.log(action.payload, "UPDATE_PROFILE_PICTURES_SERVER");
     // after the user sent the pictures to the server, we need to clear the data from the state to not display the same pictures again and not send false data to the server
     return {
       ...state,
@@ -103,14 +101,22 @@ function reducer(state, action) {
       profileBooking: {
         ...state.profileBooking,
         // list the bookings that the user made on the CLIENT SIDE!
-        data: [...state.profileBooking.data, ...convertedFormat],
+        data: [
+          ...state.profileBooking.data,
+          ...state.profileBooking.dataFromServer,
+          ...convertedFormat,
+        ],
       },
     };
   }
   if (action.type === "UPDATE_PROFILE_BOOKING_DELETE") {
-    const filteredItems = state.profileBooking.data.filter(
-      (booking) => booking.Id !== action.payload
-    );
+    // filter the data that came from the server and remove the item that the user deleted
+    let filteredItems;
+    if (state.profileBooking.hasData) {
+      filteredItems = state.profileBooking.dataFromServer.filter(
+        (booking) => booking.Id !== action.payload
+      );
+    }
     return {
       ...state,
       profileBooking: {
@@ -121,15 +127,19 @@ function reducer(state, action) {
     };
   }
   if (action.type === "UPDATE_PROFILE_BOOKING_EDIT") {
-    // remove the old item from the state because we are going to overwrite it with the new one
-    let newItems = state.profileBooking.data.filter(
-      (booking) => booking.Id !== action.payload[0].Id
-    );
+    let newItems;
+    // if the user has data in the state, then we need to filter the data that came from the server and remove the item that the user edited
+    if (state.profileBooking.hasData) {
+      newItems = state.profileBooking.dataFromServer.filter(
+        (booking) => booking.Id !== action.payload[0].Id
+      );
+    }
     // add the new item to the state
     const editedItem = action.payload.map((booking) => {
       const convertDate = new DateConverter();
       return convertDate.convert(booking);
     });
+
     return {
       ...state,
       profileBooking: {
@@ -147,6 +157,29 @@ function reducer(state, action) {
         ...state.profileBooking,
         // clear the data from the state after the user sent the data to the server
         data: [],
+      },
+    };
+  }
+  if (action.type === "GET_APPOINTMENT") {
+    // get the data from the server and display it on the UI
+    const covertedFormat = action.payload.avaibility.map((booking) => {
+      console.log(booking.StartTime, "booking.StartTime");
+      const StartTime = new Date(booking.StartTime);
+      const EndTime = new Date(booking.EndTime);
+      return {
+        ...booking,
+        StartTime: StartTime,
+        EndTime: EndTime,
+      };
+    });
+    return {
+      ...state,
+      profileBooking: {
+        ...state.profileBooking,
+        // hasData is set to true because the data has been fetched from the server
+        hasData: true,
+        // the data that came from the server
+        dataFromServer: [...covertedFormat],
       },
     };
   }

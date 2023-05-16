@@ -42,7 +42,6 @@ function Appointment() {
         type: "UPDATE_PROFILE_BOOKING_ADD",
         payload: args.data,
       });
-      // console.log(args.data); // this logs the event object to the console
     }
     if (args.requestType === "eventRemove") {
       // send the data to the reducer to update the state
@@ -58,26 +57,6 @@ function Appointment() {
       });
     }
   };
-  // const data = [
-  //   {
-  //     Id: 1,
-  //     Subject: "Meeting",
-  //     StartTime: new Date(2023, 5, 15),
-  //     EndTime: new Date(2023, 5, 15),
-  //     IsAllDay: true,
-  //     Location: "Glasgow",
-  //     Description: "Test",
-  //   },
-  //   {
-  //     Id: 2,
-  //     Subject: "Meeting",
-  //     StartTime: new Date(2023, 5, 16),
-  //     EndTime: new Date(2023, 5, 16),
-  //     IsAllDay: true,
-  //     Location: "Glasgow",
-  //     Description: "Test",
-  //   },
-  // ];
   useEffect(() => {
     makingRequest(
       "get",

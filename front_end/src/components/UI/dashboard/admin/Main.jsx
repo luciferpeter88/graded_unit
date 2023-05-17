@@ -12,15 +12,22 @@ import TopBar from "./TopBar";
 import navContext from "../../../../context_Reducer/nav/navContext";
 import test from "../../../../assets/images/test/test.jpg";
 import { NavLink } from "react-router-dom";
+import context from "../../../../services/Admin/adminContext";
 
 const Main = () => {
   const { navState } = useContext(navContext);
+  // get the reducer functions and the initial state from the context
+  const {
+    adminDispatchServices,
+    adminStateServices: { users },
+  } = useContext(context);
+  console.log(users, "Data from the context");
   //dummy data for testing
   const headers = ["Name", "Status", "Action"];
   const headers2 = ["Image", "Status", "Action"];
   const headers3 = ["Name", "Status", "Action"];
   const headers4 = ["Image", "Status", "Action"];
-
+  // data will be replaced with the data from the database and functions will be added to the buttons to make various requests to the database
   const data = [
     { name: "Alice", status: "Approved" },
     { name: "Bob", status: "Declined" },
@@ -99,7 +106,7 @@ const Main = () => {
             <h2>Helpers Availability</h2>
             <NavLink to="/dashboard/events">
               {/* eslint-disable-next-line */}
-              <a className="btn">Events</a>
+              <h2 className="btn">Events</h2>
             </NavLink>
           </div>
 

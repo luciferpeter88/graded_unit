@@ -29,6 +29,11 @@ import profileInitialServices from "../services/Profile/initial";
 import profileReducerServices from "../services/Profile/reducer";
 import profileContextServices from "../services/Profile/profileContext";
 // end of profile data
+// admin data
+import adminInitialServices from "../services/Admin/initial";
+import adminReducerServices from "../services/Admin/reducer";
+import adminContextServices from "../services/Admin/adminContext";
+// end of admin data
 function AppContext({ children }) {
   const [navState, navDispatch] = useReducer(navReducer, navInitial);
   const [gameState, gameDispatch] = useReducer(gamesReducer, gamesInitial);
@@ -45,6 +50,10 @@ function AppContext({ children }) {
     profileReducerServices,
     profileInitialServices
   );
+  const [adminStateServices, adminDispatchServices] = useReducer(
+    adminReducerServices,
+    adminInitialServices
+  );
   return (
     <navContext.Provider value={{ navState, navDispatch }}>
       <gamesContext.Provider value={{ gameState, gameDispatch }}>
@@ -54,7 +63,11 @@ function AppContext({ children }) {
               <profileContextServices.Provider
                 value={{ profileStateServices, profileDispatchServices }}
               >
-                {children}
+                <adminContextServices.Provider
+                  value={{ adminStateServices, adminDispatchServices }}
+                >
+                  {children}
+                </adminContextServices.Provider>
               </profileContextServices.Provider>
             </authContext.Provider>
           </profileContext.Provider>

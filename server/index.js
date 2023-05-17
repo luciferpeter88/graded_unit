@@ -12,6 +12,7 @@ const login = require("./controllers/routes/Users/login");
 const profile = require("./controllers/routes/Users/profile");
 // inmitiate the global middlewares
 new GlobalMiddlewares(express);
+const admin = require("./controllers/routes/admin/admin");
 
 // create a route for the login page
 express.use("/login", login.getRouter());
@@ -19,6 +20,7 @@ express.use("/login", login.getRouter());
 // create a route for the registration page
 express.use("/registration", registration.getRouter());
 express.use("/profile", profile.getRouter());
+express.use("/admin", admin.getRouter());
 
 const PORT = process.env.PORT || 4000;
 express.listen(PORT, () => {

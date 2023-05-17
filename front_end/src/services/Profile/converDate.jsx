@@ -9,7 +9,7 @@ class DateConverter {
     }, ${dateEndObject.getDate()}`;
     const convertedDateStart = `${dateStartObject.getFullYear()}, ${
       dateStartObject.getMonth() + 1
-    }, ${dateStartObject.getDate()}`;
+    }, ${dateStartObject.getDate() - 1}`;
     return {
       ...arg,
       StartTime: convertedDateEnd,

@@ -6,6 +6,7 @@ const initialState = {
     // dataFromServer is an array that holds the data from the server which is unchangeble
     dataFromServer: [],
   },
+  pictures: { hasData: false, dataFromServer: [] },
 };
 
 export default initialState;

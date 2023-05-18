@@ -24,6 +24,16 @@ class Admin extends BaseRoute {
       // I am not going to use session here because I do not need to use this data in any other route.
       response.send(users);
     });
+    super.getRouter().get("/pictures", async (request, response) => {
+      // get all the users from the database and filter out the admin and remove the password from the data
+      const pictures = await await connection.db
+        .collection("pictures")
+        .find()
+        .toArray();
+      // send back the filtered data to the admin
+      // I am not going to use session here because I do not need to use this data in any other route.
+      response.send(pictures);
+    });
   }
 }
 // instantiate the session class

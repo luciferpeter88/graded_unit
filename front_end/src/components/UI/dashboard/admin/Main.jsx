@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "../../../../styles/dashboard/dashboard.css";
 import {
   menuOutline,
@@ -13,53 +13,82 @@ import navContext from "../../../../context_Reducer/nav/navContext";
 import test from "../../../../assets/images/test/test.jpg";
 import { NavLink } from "react-router-dom";
 import context from "../../../../services/Admin/adminContext";
+import makingRequest from "../../../../services/request/makingRequest";
 
 const Main = () => {
   const { navState } = useContext(navContext);
   // get the reducer functions and the initial state from the context
   const {
     adminDispatchServices,
-    adminStateServices: { users },
+    adminStateServices: { users, pictures },
   } = useContext(context);
-  console.log(users, "Data from the context");
+
+  useEffect(() => {
+    makingRequest(
+      "get",
+      "http://localhost:4000/admin/users",
+      adminDispatchServices,
+      "GET_USERS"
+    );
+    makingRequest(
+      "get",
+      "http://localhost:4000/admin/pictures",
+      adminDispatchServices,
+      "GET_PICTURES"
+    );
+  }, [adminDispatchServices]);
+  // console.log(users, "Data from the context");
+
   //dummy data for testing
   const headers = ["Name", "Status", "Action"];
   const headers2 = ["Image", "Status", "Action"];
   const headers3 = ["Name", "Status", "Action"];
   const headers4 = ["Image", "Status", "Action"];
+
+  const data = users.hasData
+    ? users.dataFromServer.map((user) => {
+        return {
+          name: user.firstName + " " + user.lastName,
+          status: user.status,
+        };
+      })
+    : [];
   // data will be replaced with the data from the database and functions will be added to the buttons to make various requests to the database
-  const data = [
-    { name: "Alice", status: "Approved" },
-    { name: "Bob", status: "Declined" },
-    { name: "Charlie", status: "Pending" },
-    { name: "David", status: "Approved" },
-    { name: "Eva", status: "Declined" },
-  ];
-  const data2 = [
-    { name: "test", status: "Approved" },
-    { name: "test", status: "Declined" },
-    { name: "test", status: "Pending" },
-    { name: "test", status: "Approved" },
-    { name: "test", status: "Declined" },
-  ];
-  const data3 = [
-    { name: "Alice", status: "Pending" },
-    { name: "Bob", status: "Pending" },
-    { name: "Charlie", status: "Pending" },
-    { name: "David", status: "Pending" },
-    { name: "Eva", status: "Pending" },
-  ];
-  const data4 = [
-    { name: "test", status: "Pending" },
-    { name: "test", status: "Pending" },
-    { name: "test", status: "Pending" },
-    { name: "test", status: "Pending" },
-    { name: "test", status: "Pending" },
-  ];
-  const options = ["Approved", "Declined", "Pending"];
-  const options2 = ["Approved", "Declined", "Pending"];
-  const options3 = ["Approved", "Declined", "Pending"];
-  const options4 = ["Approved", "Declined", "Pending"];
+
+  const data2 = pictures.hasData
+    ? pictures.dataFromServer.map((picture) => {
+        return {
+          name: picture.uploadedBy,
+          status: picture.status,
+        };
+      })
+    : [];
+
+  const data3 = users.hasData
+    ? users.dataFromServer
+        .filter((filter) => filter.status === "pending")
+        .map((user) => {
+          return {
+            name: user.firstName + " " + user.lastName,
+            status: user.status,
+          };
+        })
+    : [];
+
+  const data4 = pictures.hasData
+    ? pictures.dataFromServer
+        .filter((filtered) => filtered.status === "pending")
+        .map((picture) => {
+          return {
+            name: picture.uploadedBy,
+            status: picture.status,
+          };
+        })
+    : [];
+  const options = ["Approve", "Decline", "Pending"];
+  const options2 = ["Approve", "Decline", "Pending"];
+  const options3 = ["Approve", "Decline", "Pending"];
+  const options4 = ["Approve", "Decline", "Pending"];
 
   return (
     <div className={`main ${navState.toggleDash ? "active" : null}`}>
@@ -69,7 +98,7 @@ const Main = () => {
         <Card
           icon={peopleOutline}
           text="Registered Helpers"
-          number="1,504"
+          number={data.length}
           headers={headers}
           data={data}
           options={options}
@@ -77,7 +106,7 @@ const Main = () => {
         <Card
           icon={cloudUploadOutline}
           text="Uploaded Pictures"
-          number="80"
+          number={data2.length}
           headers={headers2}
           data={data2}
           options={options2}
@@ -85,7 +114,7 @@ const Main = () => {
         <Card
           icon={hourglassOutline}
           text="Pending registrations"
-          number="284"
+          number={data3.length}
           headers={headers3}
           data={data3}
           options={options3}
@@ -93,7 +122,7 @@ const Main = () => {
         <Card
           icon={hourglassOutline}
           text="Pending Pictures"
-          number="2"
+          number={data4.length}
           headers={headers4}
           data={data4}
           options={options4}
@@ -143,17 +172,25 @@ const Main = () => {
           <div className="cardHeader">
             <h2>Registered Helpers</h2>
           </div>
-          <div className=" mt-5 text-white flex flex-col gap-y-2">
-            {/* dummy data for testing */}
-            <div className=" flex gap-x-3 items-center bg-green-900 w-full p-3 rounded">
-              <img src={test} alt="" className="h-14 w-14" />
-              <h2>Peter Kaszap Nagy</h2>
-            </div>
-            <div className=" flex gap-x-3 items-center bg-green-900 w-full p-3 rounded">
-              <img src={test} alt="" className="h-14 w-14" />
-              <h2>Peter Kaszap Nagy</h2>
-            </div>
-          </div>
+          {users.hasData
+            ? users.dataFromServer.map((user) => {
+                return (
+                  <React.Fragment>
+                    <div className=" mt-5 text-white flex flex-col gap-y-2">
+                      {/* dummy data for testing */}
+                      <div className=" flex gap-x-3 items-center bg-green-900 w-full p-3 rounded">
+                        <img
+                          src={user.profilePicture}
+                          alt=""
+                          className="h-14 w-14"
+                        />
+                        <h2>{user.firstName + "" + user.lastName}</h2>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                );
+              })
+            : null}
         </div>
       </div>
     </div>

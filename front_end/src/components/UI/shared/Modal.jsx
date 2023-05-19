@@ -36,32 +36,37 @@ function Modal({ showModal, setShowModal, text, headers, data, options }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {data?.map((row, index) => (
-                        <tr
-                          key={index}
-                          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                        >
-                          <th
-                            scope="row"
-                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                          >
-                            {row.name}
-                          </th>
-                          <td className="px-6 py-4">{row.status}</td>
-                          <td className="px-6 py-4">
-                            <select
-                              defaultValue={row.status}
-                              className="text-gray-500 dark:text-gray-400"
+                      {data?.map(
+                        (row, index) => (
+                          console.log(row),
+                          (
+                            <tr
+                              key={index}
+                              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                             >
-                              {options?.map((option, index) => (
-                                <option key={index} value={option}>
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
-                          </td>
-                        </tr>
-                      ))}
+                              <th
+                                scope="row"
+                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                              >
+                                {row.name}
+                              </th>
+                              <td className="px-6 py-4">{row.status}</td>
+                              <td className="px-6 py-4">
+                                <select
+                                  defaultValue={row.status}
+                                  className="text-gray-500 dark:text-gray-400"
+                                >
+                                  {options?.map((option, index) => (
+                                    <option key={index} value={option}>
+                                      {option}
+                                    </option>
+                                  ))}
+                                </select>
+                              </td>
+                            </tr>
+                          )
+                        )
+                      )}
                     </tbody>
                   </table>
                 </div>

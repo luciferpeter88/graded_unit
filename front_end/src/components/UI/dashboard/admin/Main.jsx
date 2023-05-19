@@ -10,7 +10,6 @@ import {
 import Card from "./Card";
 import TopBar from "./TopBar";
 import navContext from "../../../../context_Reducer/nav/navContext";
-import test from "../../../../assets/images/test/test.jpg";
 import { NavLink } from "react-router-dom";
 import context from "../../../../services/Admin/adminContext";
 import makingRequest from "../../../../services/request/makingRequest";
@@ -147,24 +146,40 @@ const Main = () => {
               </tr>
             </thead>
             {/* dummy data for testing */}
-            <tbody>
-              <tr className="flex justify-between items-center rounded">
-                <td className="flex gap-x-3 items-center">
-                  <img src={test} alt="" className="h-14 w-14" />
-                  Peter Kaszap Nagy
-                </td>
-                <td>05/07/2023</td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr className="flex justify-between items-center rounded">
-                <td className="flex gap-x-3 items-center">
-                  <img src={test} alt="" className="h-14 w-14" />
-                  Peter Kaszap Nagy
-                </td>
-                <td>05/07/2023</td>
-              </tr>
-            </tbody>
+            {users.hasData
+              ? users.dataFromServer.map((user) => {
+                  return user.avaibility && user.avaibility.length > 0 ? (
+                    user.avaibility.map((avaible) => (
+                      <tbody key={avaible.Id}>
+                        <tr className="flex justify-between items-center rounded">
+                          <td className="flex gap-x-3 items-center">
+                            <img
+                              src={user.profilePicture}
+                              alt=""
+                              className="h-14 w-14"
+                            />
+                            {user.firstName + " " + user.lastName}
+                          </td>
+                          <td>{avaible.StartTime.substring(0, 10)}</td>
+                        </tr>
+                      </tbody>
+                    ))
+                  ) : (
+                    <tbody key={user._id}>
+                      <tr className="flex justify-between items-center rounded">
+                        <td className="flex gap-x-3 items-center">
+                          <img
+                            src={user.profilePicture}
+                            alt=""
+                            className="h-14 w-14"
+                          />
+                          {user.firstName + " " + user.lastName}
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })
+              : null}
           </table>
         </div>
 
@@ -175,7 +190,7 @@ const Main = () => {
           {users.hasData
             ? users.dataFromServer.map((user) => {
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={user._id}>
                     <div className=" mt-5 text-white flex flex-col gap-y-2">
                       {/* dummy data for testing */}
                       <div className=" flex gap-x-3 items-center bg-green-900 w-full p-3 rounded">
@@ -184,7 +199,7 @@ const Main = () => {
                           alt=""
                           className="h-14 w-14"
                         />
-                        <h2>{user.firstName + "" + user.lastName}</h2>
+                        <h2>{user.firstName + " " + user.lastName}</h2>
                       </div>
                     </div>
                   </React.Fragment>

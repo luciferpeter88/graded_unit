@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { IonIcon } from "@ionic/react";
 import "../../../../styles/dashboard/dashboard.css";
 import Modal from "../../shared/Modal";
-import context from "../../../../services/Admin/adminContext";
 
 function Card({
   icon,
@@ -17,7 +16,6 @@ function Card({
 }) {
   // usestate will be replaced to usereducer, headers and data sa well
   const [showModal, setShowModal] = React.useState(false);
-  const { adminDispatchServices } = useContext(context);
 
   return (
     <React.Fragment>

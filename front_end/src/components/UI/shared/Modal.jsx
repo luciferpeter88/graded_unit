@@ -12,14 +12,14 @@ function Modal({
   opt,
   type,
 }) {
-  const { adminDispatchServices, adminStateServices } = useContext(context);
+  const { adminDispatchServices } = useContext(context);
   const handleSelectChange = (e, rowId) => {
     adminDispatchServices({
       type: type,
       payload: { [rowId]: e.target.value },
     });
   };
-  console.log(adminStateServices, "adminStateServicesTEST");
+
   return (
     <React.Fragment>
       {showModal ? (

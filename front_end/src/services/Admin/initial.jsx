@@ -5,8 +5,10 @@ const initialState = {
     hasData: false,
     // dataFromServer is an array that holds the data from the server which is unchangeble
     dataFromServer: [],
+    // this is the data that will be sent to the server
+    data: [],
   },
-  pictures: { hasData: false, dataFromServer: [] },
+  pictures: { hasData: false, dataFromServer: [], data: [] },
 };
 
 export default initialState;

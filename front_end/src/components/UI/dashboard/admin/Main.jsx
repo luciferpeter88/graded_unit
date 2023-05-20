@@ -39,16 +39,18 @@ const Main = () => {
   // console.log(users, "Data from the context");
 
   //dummy data for testing
-  const headers = ["Name", "Status", "Action"];
-  const headers2 = ["Image", "Status", "Action"];
+  const headers = ["Name", "Status"];
+  const headers2 = ["Image", "Status"];
   const headers3 = ["Name", "Status", "Action"];
   const headers4 = ["Image", "Status", "Action"];
 
   const data = users.hasData
     ? users.dataFromServer.map((user) => {
+        // console.log(user, "user");
         return {
           name: user.firstName + " " + user.lastName,
           status: user.status,
+          id: user._id,
         };
       })
     : [];
@@ -70,6 +72,7 @@ const Main = () => {
           return {
             name: user.firstName + " " + user.lastName,
             status: user.status,
+            id: user._id,
           };
         })
     : [];
@@ -81,13 +84,15 @@ const Main = () => {
           return {
             name: picture.uploadedBy,
             status: picture.status,
+            id: picture._id,
           };
         })
     : [];
-  const options = ["Approve", "Decline", "Pending"];
-  const options2 = ["Approve", "Decline", "Pending"];
-  const options3 = ["Approve", "Decline", "Pending"];
-  const options4 = ["Approve", "Decline", "Pending"];
+  const options3 = [" ", "pending", "active"];
+  const options4 = [" ", "pending", "active"];
+  function handleStatusChange(reqType, url, dispatch, dispatchType, data) {
+    makingRequest(reqType, url, dispatch, dispatchType, data);
+  }
 
   return (
     <div className={`main ${navState.toggleDash ? "active" : null}`}>
@@ -100,7 +105,7 @@ const Main = () => {
           number={data.length}
           headers={headers}
           data={data}
-          options={options}
+          opt={false}
         />
         <Card
           icon={cloudUploadOutline}
@@ -108,7 +113,7 @@ const Main = () => {
           number={data2.length}
           headers={headers2}
           data={data2}
-          options={options2}
+          opt={false}
         />
         <Card
           icon={hourglassOutline}
@@ -117,6 +122,17 @@ const Main = () => {
           headers={headers3}
           data={data3}
           options={options3}
+          opt={true}
+          click={() =>
+            handleStatusChange(
+              "patch",
+              "http://localhost:4000/admin/users",
+              adminDispatchServices,
+              "UPDATE_USER_STATUS_SERVER",
+              users.data
+            )
+          }
+          type="UPDATE_USER_STATUS"
         />
         <Card
           icon={hourglassOutline}
@@ -125,6 +141,17 @@ const Main = () => {
           headers={headers4}
           data={data4}
           options={options4}
+          opt={true}
+          click={() =>
+            handleStatusChange(
+              "patch",
+              "http://localhost:4000/admin/pictures",
+              adminDispatchServices,
+              "UPDATE_PICTURE_STATUS_SERVER",
+              pictures.data
+            )
+          }
+          type="UPDATE_PICTURE_STATUS"
         />
       </div>
 

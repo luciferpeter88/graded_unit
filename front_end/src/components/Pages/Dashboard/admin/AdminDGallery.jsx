@@ -20,7 +20,8 @@ function AdminDGallery() {
     <div className="product-container flex flex-col xl:flex-row h-[90vh] gap-x-5 bg-green-900 rounded-lg">
       <div className="col-sm-5 component-container w-2/3 xl:w-1/3 flex flex-col gap-y-5 mt-5 p-3 text-white">
         <div className="heading text-2xl">Uploaded By</div>
-        <div className="description text-lg">{picture.uploadedBy}</div>
+        <h2 className="text-xl">{picture.uploadedBy}</h2>
+        <div className="heading text-2xl">Status: {picture.status}</div>
       </div>
       <div className="col-sm-5 image-container xl:w-2/3 mt-10 xl:mt-0 flex justify-center items-center">
         <img width="100%" height="100%" src={picture.imagePath} alt="" />

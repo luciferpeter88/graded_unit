@@ -59,6 +59,15 @@ function Helpers() {
     }
     // eslint-disable-next-line
   }, [id]);
+  useEffect(() => {
+    makingRequest(
+      "get",
+      "http://localhost:4000/admin/users",
+      adminDispatchServices,
+      "GET_USERS"
+    );
+    // eslint-disable-next-line
+  }, []);
 
   function onChange(e) {
     setSelected({ ...selected, [e.target.id]: e.target.value });

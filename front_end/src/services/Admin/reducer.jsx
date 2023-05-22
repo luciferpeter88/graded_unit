@@ -81,6 +81,54 @@ function reducer(state, action) {
       },
     };
   }
+  // UPDATE_BOOKING_ADD
+  // booking reducer from here
+  if (action.type === "GET_BOOKING") {
+    return {
+      ...state,
+      booking: {
+        ...state.booking,
+        hasData: true,
+        dataFromServer: action.payload,
+      },
+    };
+  }
+  if (action.type === "UPDATE_BOOKING_ADD") {
+    // convert the date to a format that the calendar can understand
+    console.log(action.payload, "UPDATE_BOOKING_ADD");
+    // console.log(state.booking.data, "updatetdStates");
+    return {
+      ...state,
+      booking: {
+        ...state.booking,
+        fetch: !state.booking.fetch,
+        // list the bookings that the user made on the CLIENT SIDE!
+        dataFromServer: [
+          // ...state.booking.dataFromServer,
+          ...action.payload,
+        ],
+      },
+    };
+  }
+  if (action.type === "UPDATE_BOOKING_DELETE") {
+    return {
+      ...state,
+      booking: {
+        ...state.booking,
+        dataFromServer: action.payload,
+      },
+    };
+  }
+  if (action.type === "UPDATE_BOOKING_EDIT") {
+    return {
+      ...state,
+      fetch: !state.booking.fetch,
+      booking: {
+        ...state.booking,
+        dataFromServer: action.payload,
+      },
+    };
+  }
   // clear the data from the state when the modal is closed
   if (action.type === "RESET") {
     return {

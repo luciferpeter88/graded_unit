@@ -46,7 +46,6 @@ function Helpers() {
   }
   // run the useEffect when the id is changed
   useEffect(() => {
-    // console.log(filteredPerson, "filtereEFFECT");
     if (filteredPerson.length > 0) {
       setSelected({
         inputFirstName: filteredPerson[0].firstName,
@@ -92,7 +91,6 @@ function Helpers() {
       selected
     );
   }
-  console.log(selected, "selected");
   return (
     <div className={`main ${navState.toggleDash ? "active" : null}`}>
       <TopBar menu={menuOutline} search={searchOutline} />

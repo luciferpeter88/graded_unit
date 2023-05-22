@@ -107,6 +107,12 @@ class Admin extends BaseRoute {
         console.log(error);
       }
     });
+    super.getRouter().get("/booking", async (request, response) => {
+      const getEvents = new GetDataDb("events");
+      const events = await getEvents.getData();
+      // send back the filtered data to the admin
+      response.send(events);
+    });
   }
 }
 // instantiate the session class

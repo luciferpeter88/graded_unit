@@ -9,6 +9,11 @@ const initialState = {
     data: [],
   },
   pictures: { hasData: false, dataFromServer: [], data: [] },
+  booking: {
+    hasData: false,
+    fetch: false,
+    dataFromServer: [],
+  },
 };
 
 export default initialState;

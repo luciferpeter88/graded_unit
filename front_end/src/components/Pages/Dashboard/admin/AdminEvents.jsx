@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "../../../../styles/dashboard/dashboard.css";
 import TopBar from "../../../UI/dashboard/admin/TopBar";
 import { menuOutline, searchOutline } from "ionicons/icons";
@@ -13,57 +13,80 @@ import {
   Inject,
 } from "@syncfusion/ej2-react-schedule";
 import "../../../../styles/dashboard/adminevents.css";
+import context from "../../../../services/Admin/adminContext";
+import makingRequest from "../../../../services/request/makingRequest";
 
 function AdminEvents() {
   const { navState } = useContext(navContext);
+  // context for manipulating the data from the server
+  const {
+    adminDispatchServices,
+    adminStateServices: { booking },
+  } = useContext(context);
   // will be using context
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth(); // Month is 0-indexed, so January is 0 and December is 11
   const day = today.getDate();
-  // dummy data
-  const eventData = [
-    {
-      Id: 1,
-      Subject: "Explosion of Betelgeuse Star",
-      StartTime: new Date(2023, 4, 15, 9, 30),
-      EndTime: new Date(2023, 4, 15, 11, 0),
-      ImageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb0YYH7OjulBt1Iu4UdNwrYcmmqmkybXDb7A&usqp=CAU",
-    },
-    {
-      Id: 2,
-      Subject: "Thule Air Crash Report",
-      StartTime: new Date(2023, 4, 12, 12, 0),
-      EndTime: new Date(2023, 4, 12, 14, 0),
-      ImageUrl: "https://example.com/path/to/image2.jpg",
-    },
-    {
-      Id: 3,
-      Subject: "Blue Moon Eclipse",
-      StartTime: new Date(2023, 4, 13, 9, 30),
-      EndTime: new Date(2023, 4, 13, 11, 0),
-      ImageUrl: "https://example.com/path/to/image2.jpg",
-    },
-    {
-      Id: 4,
-      Subject: "Meteor Showers in 2018",
-      StartTime: new Date(2023, 6, 14, 13, 0),
-      EndTime: new Date(2023, 6, 14, 14, 30),
-      ImageUrl: "https://example.com/path/to/image2.jpg",
-    },
-  ];
-  const onActionBegin = (args) => {
-    if (args.requestType === "eventCreate") {
-      const newEventData = args.data[0];
-      console.log("New event data:", newEventData);
-      test();
-      // Handle the new event data, e.g. send it to the server or update the state
+
+  const onPopupOpen = (args) => {
+    if (args.type === "Editor") {
+      // Find the "All Day" checkbox element in the Scheduler's DOM
+      let allDayElement = args.element.querySelector(
+        ".e-all-day-time-zone-row"
+      );
+      let repeatElement = args.element.querySelector(".e-editor");
+
+      if (allDayElement) {
+        // Hide the "All Day" checkbox
+        allDayElement.style.display = "none";
+        repeatElement.style.display = "none";
+      }
     }
   };
-  function test() {
-    console.log("test");
-  }
+  const onActionBegin = (args) => {
+    if (args.requestType === "eventCreate") {
+      makingRequest(
+        "post",
+        "http://localhost:4000/events/create",
+        adminDispatchServices,
+        "UPDATE_BOOKING_ADD",
+        args.data
+      );
+    }
+    if (args.requestType === "eventRemove") {
+      makingRequest(
+        "post",
+        "http://localhost:4000/events/delete",
+        adminDispatchServices,
+        "UPDATE_BOOKING_DELETE",
+        { id: args.data[0].Id }
+      );
+    }
+    if (args.requestType === "eventChange") {
+      adminDispatchServices({
+        type: "UPDATE_BOOKING_EDIT",
+        payload: [args.data],
+      });
+      makingRequest(
+        "post",
+        "http://localhost:4000/events/edit",
+        adminDispatchServices,
+        "UPDATE_BOOKING_EDIT",
+        args.data
+      );
+    }
+  };
+  useEffect(() => {
+    // get the data from the server
+    makingRequest(
+      "get",
+      "http://localhost:4000/events",
+      adminDispatchServices,
+      "GET_BOOKING"
+    );
+  }, [booking.fetch, adminDispatchServices]);
+  console.log(booking, "AdminEVENTSComponent");
 
   return (
     <div className={`main ${navState.toggleDash ? "active" : null}`}>
@@ -71,11 +94,12 @@ function AdminEvents() {
       <div className=" p-5">
         <ScheduleComponent
           actionBegin={onActionBegin}
+          popupOpen={onPopupOpen}
           height="550px"
           currentView="Month"
           selectedDate={new Date(year, month, day)}
           eventSettings={{
-            dataSource: eventData,
+            dataSource: booking.hasData ? booking.dataFromServer : null,
             allowAdding: true,
             allowEditing: true,
           }}

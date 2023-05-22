@@ -11,7 +11,7 @@ function Input({
   name,
   change,
 }) {
-  const options = [{ value: "active" }, { value: "pending" }];
+  const options = [{ value: "" }, { value: "active" }, { value: "pending" }];
   return (
     <div className="w-full md:w-1/2 mb-3 md:mb-0 px-2">
       <label
@@ -25,6 +25,7 @@ function Input({
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id={id}
           defaultValue={defaultValue}
+          onChange={change}
         >
           {options.map((option) => (
             <option key={option.value} value={option.value}>

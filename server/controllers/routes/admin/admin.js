@@ -63,6 +63,37 @@ class Admin extends BaseRoute {
       const pictures = await getPictures.getData();
       response.send(pictures);
     });
+    super.getRouter().put("/users/:id", async (request, response) => {
+      const id = request.params.id;
+      const {
+        inputFirstName,
+        inputLastName,
+        username,
+        email,
+        phoneNum,
+        status,
+      } = request.body;
+      console.log(id, "id");
+      try {
+        await User.findOneAndUpdate(
+          { _id: id },
+          {
+            firstName: inputFirstName,
+            lastName: inputLastName,
+            userName: username,
+            email: email,
+            phoneNumber: phoneNum,
+            status: status,
+          },
+          { new: true }
+        );
+        const getUsers = new GetDataDb("users");
+        const users = await getUsers.getData();
+        response.send(users);
+      } catch (error) {
+        console.log(error);
+      }
+    });
   }
 }
 // instantiate the session class

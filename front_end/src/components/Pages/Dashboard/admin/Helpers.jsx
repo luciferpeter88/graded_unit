@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../../../../styles/dashboard/dashboard.css";
 import TopBar from "../../../UI/dashboard/admin/TopBar";
 import { menuOutline, searchOutline } from "ionicons/icons";
@@ -7,32 +7,73 @@ import Input from "../../../UI/shared/Input";
 import { ListBoxComponent } from "@syncfusion/ej2-react-dropdowns";
 import "@syncfusion/ej2-react-dropdowns/styles/material.css";
 import context from "../../../../services/Admin/adminContext";
-
+import makingRequest from "../../../../services/request/makingRequest";
 function Helpers() {
   const { navState } = useContext(navContext);
   const [id, setId] = useState("");
+  // useState for selected user that will be displayed in the input fields what are coming from the server.
+  const [selected, setSelected] = useState({
+    inputFirstName: "",
+    inputLastName: "",
+    username: "",
+    email: "",
+    phoneNum: "",
+    status: "",
+  });
   const {
+    adminDispatchServices,
     adminStateServices: { users },
   } = useContext(context);
+  // target the id of the selected user
   function onSelect(e) {
     setId(e.value[0]);
-    // console.log(e);
   }
-  // console.log(id);
   // console.log(users, "users");
   let people = {};
+  // filter the user that has the same id as the selected user
   let filteredPerson = {};
   if (users.hasData) {
     people = users.dataFromServer.map((user) => ({
       id: user._id,
       text: user.firstName + " " + user.lastName,
     }));
+    // if the id is not set, set the id to the first user in the array
     if (!id) {
       setId(users.dataFromServer[0]._id);
     }
+    // filter the user that has the same id as the selected user
     filteredPerson = users.dataFromServer.filter((user) => user._id === id);
   }
-  // console.log(filteredPerson, "filtered");
+  // run the useEffect when the id is changed
+  useEffect(() => {
+    // console.log(filteredPerson, "filtereEFFECT");
+    if (filteredPerson.length > 0) {
+      setSelected({
+        inputFirstName: filteredPerson[0].firstName,
+        inputLastName: filteredPerson[0].lastName,
+        username: filteredPerson[0].userName,
+        email: filteredPerson[0].email,
+        phoneNum: filteredPerson[0].phoneNumber,
+        status: filteredPerson[0].status,
+      });
+    }
+    // eslint-disable-next-line
+  }, [id]);
+
+  function onChange(e) {
+    setSelected({ ...selected, [e.target.id]: e.target.value });
+  }
+  function onSubmit(e) {
+    e.preventDefault();
+    makingRequest(
+      "put",
+      `http://localhost:4000/admin/users/${id}`,
+      adminDispatchServices,
+      "UPDATE_USER_PROFILE",
+      selected
+    );
+  }
+  console.log(selected, "selected");
   return (
     <div className={`main ${navState.toggleDash ? "active" : null}`}>
       <TopBar menu={menuOutline} search={searchOutline} />
@@ -69,14 +110,7 @@ function Helpers() {
               </p>
               <p className="text-green-900 text-sm font-semibold mt-3">
                 Current Status:{" "}
-                <span
-                  className={`block mt-1${
-                    filteredPerson.length > 0 &&
-                    filteredPerson[0].status === "active"
-                      ? " text-green-500"
-                      : "text-yellow-500"
-                  }`}
-                >
+                <span className="text-green-500 font-semibold mt-2">
                   {filteredPerson.length > 0
                     ? filteredPerson[0].status.toUpperCase()
                     : null}
@@ -90,53 +124,40 @@ function Helpers() {
                   id="inputFirstName"
                   type="text"
                   placeholder="Jane"
-                  defaultValue={
-                    filteredPerson.length > 0
-                      ? filteredPerson[0].firstName
-                      : null
-                  }
+                  defaultValue={selected.inputFirstName}
+                  change={onChange}
                 />
                 <Input
                   label="Last name"
                   id="inputLastName"
                   type="text"
                   placeholder="Smith"
-                  defaultValue={
-                    filteredPerson.length > 0
-                      ? filteredPerson[0].lastName
-                      : null
-                  }
+                  defaultValue={selected.inputLastName}
+                  change={onChange}
                 />
                 <Input
                   label="Username"
                   id="username"
                   type="text"
                   placeholder="Jane"
-                  defaultValue={
-                    filteredPerson.length > 0
-                      ? filteredPerson[0].userName
-                      : null
-                  }
+                  defaultValue={selected.username}
+                  change={onChange}
                 />
                 <Input
                   label="Email"
                   id="email"
                   type="text"
                   placeholder="jane@gmail.com"
-                  defaultValue={
-                    filteredPerson.length > 0 ? filteredPerson[0].email : null
-                  }
+                  defaultValue={selected.email}
+                  change={onChange}
                 />
                 <Input
                   label="Phone number"
                   id="phoneNum"
                   type="tel"
                   placeholder="07401772020"
-                  defaultValue={
-                    filteredPerson.length > 0
-                      ? filteredPerson[0].phoneNumber
-                      : null
-                  }
+                  defaultValue={selected.phoneNum}
+                  change={onChange}
                 />
                 <Input
                   htmlFor="status"
@@ -144,13 +165,15 @@ function Helpers() {
                   id="status"
                   type="text"
                   inputType="select"
-                  defaultValue=""
+                  defaultValue={selected.status}
+                  change={onChange}
                 />
               </div>
               <div className=" px-2 mt-5 flex gap-x-3">
                 <button
                   className="items-center px-3 py-2 text-sm font text-center text-white   bg-green-900 h-10 w-32 rounded font-medium cursor-pointer"
                   type="button"
+                  onClick={onSubmit}
                 >
                   Save changes
                 </button>

@@ -62,6 +62,16 @@ function reducer(state, action) {
       },
     };
   }
+  if (action.type === "UPDATE_USER_PROFILE") {
+    console.log(action.payload, "payload");
+    return {
+      ...state,
+      users: {
+        ...state.users,
+        dataFromServer: action.payload,
+      },
+    };
+  }
   // clear the data from the state when the modal is closed
   if (action.type === "RESET") {
     return {

@@ -1,4 +1,3 @@
-import DateConverter from "./converDate";
 function reducer(state, action) {
   // update the data state with the incoming data from the server and display it on the UI
   if (action.type === "GET_PROFILE") {
@@ -91,11 +90,6 @@ function reducer(state, action) {
   }
   // booking reducer from here
   if (action.type === "UPDATE_PROFILE_BOOKING_ADD") {
-    // convert the date to a format that the calendar can understand
-    const convertedFormat = action.payload.map((booking) => {
-      const convertDate = new DateConverter();
-      return convertDate.convert(booking);
-    });
     return {
       ...state,
       profileBooking: {
@@ -104,7 +98,7 @@ function reducer(state, action) {
         data: [
           ...state.profileBooking.data,
           ...state.profileBooking.dataFromServer,
-          ...convertedFormat,
+          ...action.payload,
         ],
       },
     };
@@ -134,18 +128,13 @@ function reducer(state, action) {
         (booking) => booking.Id !== action.payload[0].Id
       );
     }
-    // add the new item to the state
-    const editedItem = action.payload.map((booking) => {
-      const convertDate = new DateConverter();
-      return convertDate.convert(booking);
-    });
 
     return {
       ...state,
       profileBooking: {
         ...state.profileBooking,
         // list the bookings that the user made on the CLIENT SIDE!
-        data: [...newItems, ...editedItem],
+        data: [...newItems, ...action.payload],
       },
     };
   }
@@ -162,16 +151,7 @@ function reducer(state, action) {
   }
   if (action.type === "GET_APPOINTMENT") {
     // get the data from the server and display it on the UI
-    const covertedFormat = action.payload.avaibility.map((booking) => {
-      console.log(booking.StartTime, "booking.StartTime");
-      const StartTime = new Date(booking.StartTime);
-      const EndTime = new Date(booking.EndTime);
-      return {
-        ...booking,
-        StartTime: StartTime,
-        EndTime: EndTime,
-      };
-    });
+
     return {
       ...state,
       profileBooking: {
@@ -179,7 +159,7 @@ function reducer(state, action) {
         // hasData is set to true because the data has been fetched from the server
         hasData: true,
         // the data that came from the server
-        dataFromServer: [...covertedFormat],
+        dataFromServer: [...action.payload.avaibility],
       },
     };
   }

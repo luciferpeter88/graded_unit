@@ -22,7 +22,7 @@ function AllPictures() {
                 className="border relative h-56 flex justify-center items-center"
               >
                 <img
-                  class="w-full h-full object-cover"
+                  className="w-full h-full object-cover"
                   src={picture.imagePath}
                   alt=""
                 />

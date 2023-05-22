@@ -60,7 +60,6 @@ class Event extends BaseRoute {
       const getDataDb = new GetDataDb("events");
       const events = await getDataDb.getData();
       response.send(events);
-      console.log(events);
     });
   }
 }

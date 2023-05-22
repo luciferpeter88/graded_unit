@@ -11,11 +11,7 @@ function Input({
   name,
   change,
 }) {
-  const options = [
-    { value: "Approved" },
-    { value: "Declined" },
-    { value: "Pending" },
-  ];
+  const options = [{ value: "active" }, { value: "pending" }];
   return (
     <div className="w-full md:w-1/2 mb-3 md:mb-0 px-2">
       <label

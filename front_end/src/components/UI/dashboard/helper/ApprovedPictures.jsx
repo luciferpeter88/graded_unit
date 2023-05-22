@@ -18,8 +18,7 @@ function ApprovedPictures() {
       {hasData
         ? allPictures
             .filter(
-              (picture) =>
-                picture.status === "approved" && id === picture.userId
+              (picture) => picture.status === "active" && id === picture.userId
             )
             .map((picture) => (
               <div
@@ -27,7 +26,7 @@ function ApprovedPictures() {
                 className="border relative h-56 flex justify-center items-center"
               >
                 <img
-                  class="w-full h-full object-cover"
+                  className="w-full h-full object-cover"
                   src={picture.imagePath}
                   alt=""
                 />

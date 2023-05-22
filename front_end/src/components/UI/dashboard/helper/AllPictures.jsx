@@ -15,7 +15,7 @@ function AllPictures() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-5">
       {hasData
         ? allPictures
-            .filter((picture) => picture.status === "approved")
+            .filter((picture) => picture.status === "active")
             .map((picture) => (
               <div
                 key={picture._id}

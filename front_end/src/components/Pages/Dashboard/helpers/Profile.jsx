@@ -26,7 +26,7 @@ function Profile() {
   // get the profile details from the context and the profile services context to make a get request to the server
   const {
     profileDispatchServices,
-    profileStateServices: { profileDetails },
+    profileStateServices: { profileDetails, profileEvetns },
   } = useContext(profileServicesContext);
   // handle the click event on the edit and box component, so as to open the modal and pass the id of the component clicked to the reducer to know which component to render
   function handleclick(e) {
@@ -39,6 +39,12 @@ function Profile() {
       "http://localhost:4000/profile/details",
       profileDispatchServices,
       "GET_PROFILE"
+    );
+    makingRequest(
+      "get",
+      "http://localhost:4000/events",
+      profileDispatchServices,
+      "GET_EVENTS"
     );
     // eslint-disable-next-line
   }, []);
@@ -86,7 +92,16 @@ function Profile() {
       <Box icon={peopleOutline} id="apply" handleclick={handleclick} />
       <div className="row-span-2 col-span-1 md:col-span-2 xl:col-span-3  xl:row-span-2  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 py-3 drop-shadow-lg">
         <div className=" overflow-y-scroll max-h-[55vh]">
-          <ScheduleComponent height="100%" currentView="Agenda" readonly={true}>
+          <ScheduleComponent
+            height="100%"
+            currentView="Month"
+            readonly={true}
+            eventSettings={{
+              dataSource: profileEvetns.hasData
+                ? profileEvetns.dataFromServer
+                : null,
+            }}
+          >
             <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
           </ScheduleComponent>
         </div>

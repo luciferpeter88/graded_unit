@@ -183,6 +183,16 @@ function reducer(state, action) {
       },
     };
   }
+  if (action.type === "GET_EVENTS") {
+    return {
+      ...state,
+      profileEvetns: {
+        ...state.profileEvetns,
+        hasData: true,
+        dataFromServer: action.payload,
+      },
+    };
+  }
   // delete the data from the state when the modal is closed
   if (action.type === "CLOSE_MODAL") {
     return {

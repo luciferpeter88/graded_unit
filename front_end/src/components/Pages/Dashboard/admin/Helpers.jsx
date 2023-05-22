@@ -73,6 +73,16 @@ function Helpers() {
       selected
     );
   }
+  function deleteUser(e) {
+    e.preventDefault();
+    makingRequest(
+      "delete",
+      `http://localhost:4000/admin/users/${id}`,
+      adminDispatchServices,
+      "DELETE_USER_PROFILE",
+      selected
+    );
+  }
   console.log(selected, "selected");
   return (
     <div className={`main ${navState.toggleDash ? "active" : null}`}>
@@ -180,6 +190,7 @@ function Helpers() {
                 <button
                   className="items-center px-3 py-2 text-sm font text-center text-white   bg-red-900 h-10 w-32 rounded font-medium cursor-pointer"
                   type="button"
+                  onClick={deleteUser}
                 >
                   Delete Person
                 </button>

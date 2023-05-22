@@ -63,7 +63,16 @@ function reducer(state, action) {
     };
   }
   if (action.type === "UPDATE_USER_PROFILE") {
-    console.log(action.payload, "payload");
+    return {
+      ...state,
+      users: {
+        ...state.users,
+        dataFromServer: action.payload,
+      },
+    };
+  }
+  if (action.type === "DELETE_USER_PROFILE") {
+    console.log(action.payload, "updated, delete user profile");
     return {
       ...state,
       users: {

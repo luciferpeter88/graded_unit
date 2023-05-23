@@ -104,6 +104,7 @@ function reducer(state, action) {
     };
   }
   if (action.type === "UPDATE_PROFILE_BOOKING_DELETE") {
+    console.log(action.payload, "delete");
     // filter the data that came from the server and remove the item that the user deleted
     let filteredItems;
     if (state.profileBooking.hasData) {
@@ -111,6 +112,7 @@ function reducer(state, action) {
         (booking) => booking.Id !== action.payload
       );
     }
+    console.log(filteredItems, "filteredItems");
     return {
       ...state,
       profileBooking: {

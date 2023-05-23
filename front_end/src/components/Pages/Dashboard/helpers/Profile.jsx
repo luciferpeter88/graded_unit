@@ -19,6 +19,7 @@ import Box from "../../../UI/dashboard/helper/Box";
 import profileContext from "../../../../context_Reducer/profile/profileContext";
 import profileServicesContext from "../../../../services/Profile/profileContext";
 import makingRequest from "../../../../services/request/makingRequest";
+import Overlay from "../../../UI/dashboard/helper/Overlay";
 
 function Profile() {
   // open or close the modal
@@ -48,9 +49,12 @@ function Profile() {
     );
     // eslint-disable-next-line
   }, []);
-
+  console.log(profileDetails);
   return (
     <div className=" grid grid-cols-1 md:grid-cols-2 grid-rows-5 md:grid-rows-3 xl:grid-cols-4  min-h-screen gap-5 p-5 overflow-hidden">
+      {profileDetails.hasData && profileDetails.data.status === "pending" ? (
+        <Overlay />
+      ) : null}
       <div className=" row-span-2 md:row-span-3   bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-center items-center py-3 drop-shadow-lg">
         <div className=" flex flex-col gap-y-5 items-center">
           <img

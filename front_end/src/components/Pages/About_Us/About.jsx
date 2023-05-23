@@ -21,15 +21,14 @@ function About() {
         </div>
         <div className="aboutD flex flex-col gap-y-3 justify-center items-center text-lg lg:text-xl">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nascetur
-            imperdiet at a augue ullamcorper. Leo faucibus feugiat rutrum
-            aenean. Nisi, lectus aliquet aliquam consectetur augue praesent.
-            Lorem vulputate orci eget mi, sed pulvinar.
+            Welcome to the Obanshire Cub Scouts website! We are a dedicated
+            group of Cub Scouts, leaders, and parents/carers, focused on
+            providing a fun and educational experience for children in our local
+            community.
           </p>
           <p>
-            Ornare etiam erat volutpat tempor fringilla mi. Elit a blandit
-            faucibus est, dui interdum ut amet. Adipiscing feugiat vel at
-            posuere in. Pellentesque volutpat vestibulum.
+            Our website serves as a central hub for all the information you need
+            to know about Cub Scouts in Obanshire.
           </p>
         </div>
         <div className="aboutImg ">
@@ -45,10 +44,12 @@ function About() {
             Our history
           </h2>
           <p className="text-lg lg:text-xl">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nascetur
-            imperdiet at a augue ullamcorper. Leo faucibus feugiat rutrum
-            aenean. Nisi, lectus aliquet aliquam consectetur augue praesent.
-            Lorem vulputate orci eget mi, sed pulvinar.
+            Obanshire Cub Scouts has a rich history that spans several decades.
+            Our organization was founded in the year XXXX with the vision of
+            providing a nurturing and adventurous environment for young children
+            in the Obanshire community. Since our inception, we have been
+            dedicated to instilling important values such as teamwork,
+            leadership, and community service in our Cub Scouts.
           </p>
         </div>
         <div className="ourHp flex justify-center lg:justify-end">

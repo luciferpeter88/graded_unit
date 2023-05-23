@@ -187,7 +187,7 @@ const Main = () => {
                             />
                             {user.firstName + " " + user.lastName}
                           </td>
-                          <td>{avaible.StartTime.substring(0, 10)}</td>
+                          <td>{avaible.StartTime?.substring(0, 10)}</td>
                         </tr>
                       </tbody>
                     ))

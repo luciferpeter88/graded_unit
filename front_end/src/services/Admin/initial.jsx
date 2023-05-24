@@ -7,8 +7,9 @@ const initialState = {
     dataFromServer: [],
     // this is the data that will be sent to the server
     data: [],
+    fetch: false,
   },
-  pictures: { hasData: false, dataFromServer: [], data: [] },
+  pictures: { hasData: false, dataFromServer: [], data: [], fetch: false },
   booking: {
     hasData: false,
     fetch: false,

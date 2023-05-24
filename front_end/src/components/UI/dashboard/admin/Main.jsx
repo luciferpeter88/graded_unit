@@ -35,7 +35,7 @@ const Main = () => {
       adminDispatchServices,
       "GET_PICTURES"
     );
-  }, [adminDispatchServices]);
+  }, [adminDispatchServices, users.fetch, pictures.fetch]);
   // console.log(users, "Data from the context");
 
   //dummy data for testing

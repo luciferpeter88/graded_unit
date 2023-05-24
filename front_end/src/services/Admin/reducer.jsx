@@ -40,6 +40,7 @@ function reducer(state, action) {
         dataFromServer: action.payload,
         // delete the data from the data array
         data: [],
+        fetch: !state.users.fetch,
       },
     };
   }
@@ -59,6 +60,7 @@ function reducer(state, action) {
         ...state.pictures,
         dataFromServer: action.payload,
         data: [],
+        fetch: !state.pictures.fetch,
       },
     };
   }

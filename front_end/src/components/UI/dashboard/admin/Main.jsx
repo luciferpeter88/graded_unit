@@ -36,7 +36,7 @@ const Main = () => {
       "GET_PICTURES"
     );
   }, [adminDispatchServices, users.fetch, pictures.fetch]);
-  // console.log(users, "Data from the context");
+  // refetch the data from the server when the fetch state changes to see the immediate changes
 
   //dummy data for testing
   const headers = ["Name", "Status"];

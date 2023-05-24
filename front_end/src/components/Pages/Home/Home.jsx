@@ -107,6 +107,7 @@ function Home() {
           ? events.events.map((event) => {
               return (
                 <Card
+                  key={event._id}
                   id={event._id}
                   subject={event.Subject}
                   description={event.Description}
@@ -140,7 +141,6 @@ function Home() {
                 " " +
                 singleEvents[0]?.Location
               : null}
-            {console.log}
           </h1>
           {set ? singleEvents[0]?.Description : null}
           <button className="mx-auto lg:mx-0  text-white bg-green-900 py-1 px-4 h-10 w-32 rounded font-medium mt-3 ">

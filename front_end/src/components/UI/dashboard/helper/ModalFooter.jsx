@@ -59,21 +59,7 @@ function ModalFooter() {
         />
       );
     case "appointment":
-      return (
-        <Footer
-          type={profileState.id}
-          senRequest={() =>
-            update(
-              "post",
-              "http://localhost:4000/profile/booking",
-              profileDispatchServices,
-              "UPDATE_PROFILE_APPOINTMENT_SERVER",
-              profileStateServices.profileBooking.data
-            )
-          }
-          closeModal={close}
-        />
-      );
+      return <Footer type={profileState.id} closeModal={close} />;
     default: {
       return <p>None</p>;
     }

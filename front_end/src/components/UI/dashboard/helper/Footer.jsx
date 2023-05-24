@@ -1,7 +1,7 @@
 import React from "react";
 
 function Footer({ type, senRequest, closeModal }) {
-  if (type === "apply") {
+  if (type === "apply" || type === "appointment") {
     return (
       <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
         <button

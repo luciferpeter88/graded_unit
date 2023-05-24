@@ -55,10 +55,6 @@ function Appointment() {
       );
     }
     if (args.requestType === "eventChange") {
-      // profileDispatchServices({
-      //   type: "UPDATE_PROFILE_BOOKING_EDIT",
-      //   payload: [args.data],
-      // });
       makingRequest(
         "post",
         "http://localhost:4000/profile/booking/update",

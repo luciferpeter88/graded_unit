@@ -11,9 +11,10 @@ function Apply() {
     <React.Fragment>
       <AccordionComponent>
         <AccordionItemsDirective>
-          {disclosureGuide.map((item) => {
+          {disclosureGuide.map((item, index) => {
             return (
               <AccordionItemDirective
+                key={index}
                 header={item.header}
                 content={item.content}
               />

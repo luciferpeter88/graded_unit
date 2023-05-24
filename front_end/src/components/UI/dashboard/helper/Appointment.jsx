@@ -37,24 +37,35 @@ function Appointment() {
   };
   const onActionBegin = (args) => {
     if (args.requestType === "eventCreate") {
-      // send the data to the reducer to update the state
-      profileDispatchServices({
-        type: "UPDATE_PROFILE_BOOKING_ADD",
-        payload: args.data,
-      });
+      makingRequest(
+        "post",
+        "http://localhost:4000/profile/booking/create",
+        profileDispatchServices,
+        "UPDATE_PROFILE_BOOKING_ADD",
+        args.data
+      );
     }
     if (args.requestType === "eventRemove") {
-      // send the data to the reducer to update the state
-      profileDispatchServices({
-        type: "UPDATE_PROFILE_BOOKING_DELETE",
-        payload: args.data[0].Id,
-      });
+      makingRequest(
+        "post",
+        "http://localhost:4000/profile/booking/delete",
+        profileDispatchServices,
+        "UPDATE_PROFILE_BOOKING_DELETE",
+        { id: args.data[0].Id }
+      );
     }
     if (args.requestType === "eventChange") {
-      profileDispatchServices({
-        type: "UPDATE_PROFILE_BOOKING_EDIT",
-        payload: [args.data],
-      });
+      // profileDispatchServices({
+      //   type: "UPDATE_PROFILE_BOOKING_EDIT",
+      //   payload: [args.data],
+      // });
+      makingRequest(
+        "post",
+        "http://localhost:4000/profile/booking/update",
+        profileDispatchServices,
+        "UPDATE_BOOKING_EDIT",
+        args.data
+      );
     }
   };
   useEffect(() => {

@@ -4,7 +4,8 @@ const ImageUploader = require("../../classes/users/update/profile/uploadProfileP
 const Session = require("../../classes/users/update/profile/session");
 const UploadedPictures = require("../../classes/users/update/pictures/uploadPicture");
 const { connection } = require("mongoose");
-const SaveAppointment = require("../../classes/users/update/appointment/saveAppointment");
+const getDb = require("../admin/getDataDb");
+const User = require("../../../models/user");
 
 // create a class for the user registration and extend the base route class to inherit the router
 class UserProfile extends BaseRoute {
@@ -90,17 +91,83 @@ class UserProfile extends BaseRoute {
       // instantiate the session class
       const sessionClass = new Session();
       // send back the updated data to the user
+      const getUsers = new getDb("users");
       response.send(sessionClass.getsessionData(request));
+      console.log(sessionClass.getsessionData(request), "session");
     });
     // access the getRouter method from the baseRoute class and create a put route to update the booking
-    super.getRouter().post("/booking", async (request, response) => {
+    super.getRouter().post("/booking/create", async (request, response) => {
       const sessionClass = new Session();
       // get the user id
       const id = sessionClass.getsessionData(request)._id;
+      const user = await User.findById(id);
+
       // pass in the user id and the request body to save the booking in the database
-      new SaveAppointment(id, request.body);
-      sessionClass.updateSessionData(request, { avaibility: request.body });
-      response.send({ message: "booking" });
+      const events = [...user.avaibility, ...request.body];
+      // delete the entire events array
+      await User.findByIdAndUpdate(id, { $set: { avaibility: [] } });
+      // save the new events array
+      const newEvents = events.map((appointment) => {
+        return {
+          Subject: appointment.Subject,
+          Id: appointment.Id,
+          StartTime: appointment.StartTime,
+          EndTime: appointment.EndTime,
+          IsAllDay: appointment.IsAllDay,
+          Location: appointment.Location || "",
+          Description: appointment.Description || "",
+        };
+      });
+      // save the new events array
+      const update = {
+        $push: {
+          avaibility: {
+            $each: newEvents,
+          },
+        },
+      };
+      // update the user data
+      const updateEvent = await User.findByIdAndUpdate(id, update, {
+        new: true,
+      });
+      // update the session data
+      request.session.user.avaibility = updateEvent.avaibility;
+      // send back the updated data to the user
+      response.send(sessionClass.getsessionData(request).avaibility);
+    });
+    super.getRouter().post("/booking/delete", async (request, response) => {
+      const sessionClass = new Session();
+      const id = sessionClass.getsessionData(request)._id;
+      // delete the booking from the database
+      const user = await User.findOneAndUpdate(
+        { _id: id },
+        { $pull: { avaibility: { Id: request.body.id } } },
+        { new: true }
+      );
+      request.session.user.avaibility = user.avaibility;
+
+      response.send(sessionClass.getsessionData(request).avaibility);
+    });
+    super.getRouter().post("/booking/update", async (request, response) => {
+      const sessionClass = new Session();
+      const id = sessionClass.getsessionData(request)._id;
+      console.log(request.body, "edit");
+      // update the booking in the database
+      const user = await User.findOneAndUpdate(
+        { _id: id, "avaibility.Id": request.body.Id }, // Match the user ID and the availability ID
+        {
+          $set: {
+            "avaibility.$.StartTime": request.body.StartTime,
+            "avaibility.$.EndTime": request.body.EndTime,
+            "avaibility.$.Subject": request.body.Subject || "",
+            "avaibility.$.Location": request.body.Location || "",
+            "avaibility.$.Description": request.body.Description || "",
+          },
+        }, // Update the properties as needed
+        { new: true }
+      );
+      request.session.user.avaibility = user.avaibility;
+      response.send(sessionClass.getsessionData(request).avaibility);
     });
   }
 }

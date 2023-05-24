@@ -90,53 +90,35 @@ function reducer(state, action) {
   }
   // booking reducer from here
   if (action.type === "UPDATE_PROFILE_BOOKING_ADD") {
+    // convert the date to a format that the calendar can understand
+    // console.log(state.booking.data, "updatetdStates");
     return {
       ...state,
-      profileBooking: {
-        ...state.profileBooking,
+      booking: {
+        ...state.booking,
         // list the bookings that the user made on the CLIENT SIDE!
-        data: [
-          ...state.profileBooking.data,
-          ...state.profileBooking.dataFromServer,
+        dataFromServer: [
+          // ...state.booking.dataFromServer,
           ...action.payload,
         ],
       },
     };
   }
   if (action.type === "UPDATE_PROFILE_BOOKING_DELETE") {
-    console.log(action.payload, "delete");
-    // filter the data that came from the server and remove the item that the user deleted
-    let filteredItems;
-    if (state.profileBooking.hasData) {
-      filteredItems = state.profileBooking.dataFromServer.filter(
-        (booking) => booking.Id !== action.payload
-      );
-    }
-    console.log(filteredItems, "filteredItems");
     return {
       ...state,
-      profileBooking: {
-        ...state.profileBooking,
-        // list the bookings that the user made on the CLIENT SIDE!
-        data: [...filteredItems],
+      booking: {
+        ...state.booking,
+        dataFromServer: action.payload,
       },
     };
   }
   if (action.type === "UPDATE_PROFILE_BOOKING_EDIT") {
-    let newItems;
-    // if the user has data in the state, then we need to filter the data that came from the server and remove the item that the user edited
-    if (state.profileBooking.hasData) {
-      newItems = state.profileBooking.dataFromServer.filter(
-        (booking) => booking.Id !== action.payload[0].Id
-      );
-    }
-
     return {
       ...state,
-      profileBooking: {
-        ...state.profileBooking,
-        // list the bookings that the user made on the CLIENT SIDE!
-        data: [...newItems, ...action.payload],
+      booking: {
+        ...state.booking,
+        dataFromServer: action.payload,
       },
     };
   }

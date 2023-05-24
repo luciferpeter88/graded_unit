@@ -64,10 +64,6 @@ function AdminEvents() {
       );
     }
     if (args.requestType === "eventChange") {
-      adminDispatchServices({
-        type: "UPDATE_BOOKING_EDIT",
-        payload: [args.data],
-      });
       makingRequest(
         "post",
         "http://localhost:4000/events/edit",

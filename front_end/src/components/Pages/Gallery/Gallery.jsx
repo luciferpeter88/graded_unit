@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import test from "../../../assets/images/about/about2.png";
 import Footer from "../../UI/footer/Footer";
-import Search from "../../UI/shared/Search";
 import Dark from "../../UI/gallery/Dark";
-import Arrow from "../../UI/shared/Arrow";
 import axios from "axios";
 function Gallery() {
   const [data, setData] = useState({

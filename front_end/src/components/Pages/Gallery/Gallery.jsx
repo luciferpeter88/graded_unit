@@ -48,15 +48,19 @@ function Gallery() {
             Gallery
           </h1>
         </div>
-        <div className=" grid grid-cols-1 md:grid-cols-6 gap-2 mt-16 min-h-[180vh] md:min-h-screen">
+        <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-6 mt-5 gap-4">
           {set
             ? filtered.map((filter) => {
                 return (
                   <div
-                    className="  md:col-span-3  xl:col-span-2 xl:row-span-2 relative  bg-cover bg-center cursor-pointer transform transition-transform duration-300 "
                     key={filter._id}
-                    style={{ backgroundImage: `url(${filter.imagePath})` }}
+                    className=" h-96 relative  bg-cover bg-center cursor-pointer transform transition-transform duration-300 "
                   >
+                    <img
+                      src={filter.imagePath}
+                      alt=""
+                      className=" h-full w-full"
+                    ></img>
                     <Dark />
                   </div>
                 );
@@ -64,7 +68,6 @@ function Gallery() {
             : null}
         </div>
       </div>
-      <Arrow />
       <Footer />
     </React.Fragment>
   );

@@ -175,36 +175,23 @@ const Main = () => {
             {/* dummy data for testing */}
             {users.hasData
               ? users.dataFromServer.map((user) => {
-                  return user.avaibility && user.avaibility.length > 0 ? (
-                    user.avaibility.map((avaible) => (
-                      <tbody key={avaible.Id}>
-                        <tr className="flex justify-between items-center rounded">
-                          <td className="flex gap-x-3 items-center">
-                            <img
-                              src={user.profilePicture}
-                              alt=""
-                              className="h-14 w-14"
-                            />
-                            {user.firstName + " " + user.lastName}
-                          </td>
-                          <td>{avaible.StartTime?.substring(0, 10)}</td>
-                        </tr>
-                      </tbody>
-                    ))
-                  ) : (
-                    <tbody key={user._id}>
-                      <tr className="flex justify-between items-center rounded">
-                        <td className="flex gap-x-3 items-center">
-                          <img
-                            src={user.profilePicture}
-                            alt=""
-                            className="h-14 w-14"
-                          />
-                          {user.firstName + " " + user.lastName}
-                        </td>
-                      </tr>
-                    </tbody>
-                  );
+                  return user.avaibility && user.avaibility.length > 0
+                    ? user.avaibility.map((avaible) => (
+                        <tbody key={avaible.Id}>
+                          <tr className="flex justify-between items-center rounded">
+                            <td className="flex gap-x-3 items-center">
+                              <img
+                                src={user.profilePicture}
+                                alt=""
+                                className="h-14 w-14"
+                              />
+                              {user.firstName + " " + user.lastName}
+                            </td>
+                            <td>{avaible.StartTime?.substring(0, 10)}</td>
+                          </tr>
+                        </tbody>
+                      ))
+                    : null;
                 })
               : null}
           </table>

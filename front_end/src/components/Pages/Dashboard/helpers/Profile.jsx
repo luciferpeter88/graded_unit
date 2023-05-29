@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   ScheduleComponent,
   Day,
@@ -20,6 +20,7 @@ import profileContext from "../../../../context_Reducer/profile/profileContext";
 import profileServicesContext from "../../../../services/Profile/profileContext";
 import makingRequest from "../../../../services/request/makingRequest";
 import Overlay from "../../../UI/dashboard/helper/Overlay";
+import axios from "axios";
 
 function Profile() {
   // open or close the modal
@@ -33,6 +34,8 @@ function Profile() {
   function handleclick(e) {
     profileDispatch({ type: "OPEN_MODAL", payload: e.target.id });
   }
+  const [usersAv, setUsersAv] = useState([]);
+  const [hasData, setHasdata] = useState(false);
   // make a get request to the server immediately the component is mounted to get the profile details
   useEffect(() => {
     makingRequest(
@@ -47,6 +50,30 @@ function Profile() {
       profileDispatchServices,
       "GET_EVENTS"
     );
+    async function getUsersAv() {
+      try {
+        const response = await axios({
+          url: "http://localhost:4000/profile/allUsers",
+          method: "get",
+          withCredentials: true,
+        });
+        setUsersAv(response.data);
+        setHasdata(true);
+        // Handle response data
+        console.log(response.data);
+
+        // Return the response data or perform other actions
+        return response.data;
+      } catch (error) {
+        // Handle error
+        console.error(error);
+
+        // Return an error message or perform other actions
+        throw new Error("An error occurred during the request.");
+      }
+    }
+    getUsersAv();
+
     // eslint-disable-next-line
   }, []);
   console.log(profileDetails);
@@ -55,7 +82,7 @@ function Profile() {
       {profileDetails.hasData && profileDetails.data.status === "pending" ? (
         <Overlay />
       ) : null}
-      <div className=" row-span-2 md:row-span-3   bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-center items-center py-3 drop-shadow-lg">
+      <div className=" row-span-2 md:row-span-3   bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-between items-center py-3 drop-shadow-lg">
         <div className=" flex flex-col gap-y-5 items-center">
           <img
             className="w-48 h-48 object-cover rounded-full mx-auto mb-2"
@@ -80,6 +107,34 @@ function Profile() {
           >
             Edit Profile
           </button>
+        </div>
+        <div className=" mb-auto mt-5  w-full p-5">
+          <div className=" text-xl text-green-900 font-semibold ">
+            Helpers Availability
+          </div>
+          <div className=" flex flex-col gap-3 mt-3">
+            {hasData
+              ? usersAv.map((user) => {
+                  return user.avaibility && user.avaibility.length > 0
+                    ? user.avaibility.map((avaible) => (
+                        <tbody key={avaible.Id}>
+                          <tr className="flex justify-between items-center rounded">
+                            <td className="flex gap-x-3 items-center">
+                              <img
+                                src={user.profilePicture}
+                                alt=""
+                                className="h-14 w-14"
+                              />
+                              {user.firstName + " " + user.lastName}
+                            </td>
+                            <td>{avaible.StartTime?.substring(0, 10)}</td>
+                          </tr>
+                        </tbody>
+                      ))
+                    : null;
+                })
+              : null}
+          </div>
         </div>
       </div>
       <Box

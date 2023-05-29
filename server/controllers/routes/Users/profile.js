@@ -3,7 +3,7 @@ const updateUser = require("../../classes/users/update/profile/updateUser");
 const ImageUploader = require("../../classes/users/update/profile/uploadProfilePicture");
 const Session = require("../../classes/users/update/profile/session");
 const UploadedPictures = require("../../classes/users/update/pictures/uploadPicture");
-const { connection } = require("mongoose");
+const { connection, get } = require("mongoose");
 const getDb = require("../admin/getDataDb");
 const User = require("../../../models/user");
 
@@ -168,6 +168,11 @@ class UserProfile extends BaseRoute {
       );
       request.session.user.avaibility = user.avaibility;
       response.send(sessionClass.getsessionData(request).avaibility);
+    });
+    super.getRouter().get("/allUsers", async (request, response) => {
+      const getUsers = new getDb("users");
+      const users = await getUsers.getData();
+      response.send(users);
     });
   }
 }
